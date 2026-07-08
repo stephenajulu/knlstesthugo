@@ -1,0 +1,82 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section careers-section">
+  <div class="container">
+    {{ with .Params.careers_section }}
+      <div class="section-title section-title--center reveal">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .subtitle }}</p>
+      </div>
+    {{ end }}
+    
+    {{ with .Params.tabs }}
+      <div aria-label="Career opportunity types" class="career-tabs reveal" role="tablist">
+        {{ range $index, $element := . }}
+          <button class="career-tab{{ if eq $index 0 }} is-active{{ end }}" data-career-target="{{ .id }}" type="button">{{ .title }}</button>
+        {{ end }}
+      </div>
+      
+      <div class="career-panels reveal">
+        {{ range $index, $element := . }}
+          <article class="career-panel{{ if eq $index 0 }} is-active{{ end }}" id="career-{{ .id }}">
+            <h3>{{ .heading }}</h3>
+            {{ range .paragraphs }}
+              <p>{{ . }}</p>
+            {{ end }}
+            
+            {{ if .bullets }}
+              {{ with .bullets_title }}<h4>{{ . }}</h4>{{ end }}
+              <ul>
+                {{ range .bullets }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+
+            {{ if .bullets_2 }}
+              {{ with .bullets_title_2 }}<h4>{{ . }}</h4>{{ end }}
+              <ul>
+                {{ range .bullets_2 }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+
+            {{ if .bullets_3 }}
+              {{ with .bullets_title_3 }}<h4>{{ . }}</h4>{{ end }}
+              <ul>
+                {{ range .bullets_3 }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+            
+            {{ with .note }}
+              <p class="career-note">{{ . }}</p>
+            {{ end }}
+            
+            {{ if and .button_text .button_url }}
+              <a class="btn btn--orange" href="{{ .button_url }}">{{ .button_text }}</a>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

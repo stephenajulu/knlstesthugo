@@ -1,0 +1,86 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="page-hero page-hero--who-we-are who-page-hero--compact">
+  <div class="container page-hero__inner">
+    <div>
+      <p class="kicker">{{ .Params.hero.kicker | default "About Us" }}</p>
+      <h1>{{ .Params.hero.title | default .Title }}</h1>
+      <p>{{ .Params.hero.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<!-- About Intro Section -->
+<section class="section who-page-refresh">
+  <div class="container">
+    <div class="who-page-refresh__intro">
+      <article class="who-page-refresh__story reveal">
+        <p class="kicker">{{ .Params.story.kicker }}</p>
+        <h2>{{ .Params.story.title }}</h2>
+        {{ range .Params.story.paragraphs }}
+          <p>{{ . }}</p>
+        {{ end }}
+      </article>
+
+      <aside class="who-page-refresh__context reveal">
+        <p class="kicker">{{ .Params.context.kicker }}</p>
+        <h3>{{ .Params.context.title }}</h3>
+        <p>{{ .Params.context.text }}</p>
+        {{ with .Params.context.facts }}
+          <div class="who-page-refresh__facts" aria-label="KNLS institutional facts">
+            {{ range . }}
+              <div><strong>{{ .value }}</strong><span>{{ .label }}</span></div>
+            {{ end }}
+          </div>
+        {{ end }}
+      </aside>
+    </div>
+
+    <!-- Functions / What We Do Section -->
+    {{ with .Params.functions }}
+      <section class="who-functions-section reveal" aria-labelledby="who-functions-title">
+        <div class="who-functions-section__heading">
+          <p class="kicker">{{ .kicker }}</p>
+          <h2 id="who-functions-title">{{ .title }}</h2>
+          <p>{{ .subtitle }}</p>
+        </div>
+        <div class="who-functions-grid">
+          {{ range .items }}
+            <article class="who-function-card">
+              <span aria-hidden="true" class="who-function-card__icon">{{ partial "svg-icon.html" (dict "name" .icon) }}</span>
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    <!-- Core Values Section -->
+    {{ with .Params.values }}
+      <section class="who-values-section reveal" aria-labelledby="who-values-title">
+        <div class="who-values-section__media">
+          <img alt="{{ .image_alt }}" src="{{ .image }}"/>
+        </div>
+        <div class="who-values-section__content">
+          <p class="kicker">{{ .kicker }}</p>
+          <h2 id="who-values-title">{{ .title }}</h2>
+          <ul class="who-values-list">
+            {{ range .items }}
+              <li>
+                <strong>{{ .title }}</strong>
+                <span>{{ .text }}</span>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </section>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

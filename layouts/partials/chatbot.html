@@ -1,0 +1,29 @@
+<div aria-label="KNLS chatbot assistant" class="knls-chatbot" data-knls-chatbot="">
+<button aria-controls="knlsChatbotPanel" aria-expanded="false" aria-label="Open KNLS chatbot" class="knls-chatbot__toggle" type="button">
+<span aria-hidden="true" class="knls-chatbot__avatar"><img alt="" src="/assets/images/knls-chatbot-avatar.jpg"/></span>
+</button>
+<span aria-hidden="true" class="knls-chatbot__prompt">Hi, need help?</span>
+<section class="knls-chatbot__panel" hidden="" id="knlsChatbotPanel">
+<header class="knls-chatbot__header">
+<div>
+<strong>KNLS Assistant</strong>
+<small>Simple guide for website visitors</small>
+</div>
+<button aria-label="Close chatbot" class="knls-chatbot__close" type="button">×</button>
+</header>
+<div aria-live="polite" class="knls-chatbot__messages">
+<div class="knls-chatbot__message knls-chatbot__message--bot">Hello. I can help with ISBN, legal deposit, Vtabu, contacts, opening hours, careers, accessibility, data centre and digitization.</div>
+</div>
+<div class="knls-chatbot__quick">
+<button data-chat-question="How do I apply for ISBN?" type="button">ISBN</button>
+<button data-chat-question="What are Vtabu prices?" type="button">Vtabu prices</button>
+<button data-chat-question="Where is KNLS located?" type="button">Location</button>
+<button data-chat-question="Tell me about legal deposit." type="button">Legal deposit</button>
+</div>
+<form class="knls-chatbot__form">
+<label class="sr-only" for="knlsChatInput">Ask a question</label>
+<input autocomplete="off" id="knlsChatInput" placeholder="Type your question..." type="text"/>
+<button type="submit">Send</button>
+</form>
+</section>
+</div>

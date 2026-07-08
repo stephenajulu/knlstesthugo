@@ -1,0 +1,138 @@
+{{ define "main" }}
+<!-- Hero Header -->
+<section class="page-hero service-exact-hero">
+  <div class="container page-hero__inner">
+    <div>
+      <p class="kicker">{{ .Params.hero.kicker | default "Our Services" }}</p>
+      <h1>{{ .Params.hero.title | default .Title }}</h1>
+      <p>{{ .Params.hero.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      {{ if .Params.hero.parent_url }}
+        <a href="{{ .Params.hero.parent_url }}">{{ .Params.hero.parent_title }}</a>
+        <span aria-hidden="true">/</span>
+      {{ end }}
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<!-- Core details section -->
+<section class="service-detail section {{ if .Params.no_sidebar }}service-detail--no-sidebar{{ end }}">
+  <div class="container">
+    <div class="service-detail__grid">
+      <!-- Main Content -->
+      <div class="service-detail__main">
+        {{ .Content }}
+        
+        <!-- Structured Grid Cards -->
+        {{ with .Params.cards }}
+          <div class="service-details-cards">
+            {{ range . }}
+              <article class="service-detail-card">
+                <div aria-hidden="true" class="service-detail-card__icon">{{ partial "svg-icon.html" (dict "name" .icon) }}</div>
+                <h3>{{ .title }}</h3>
+                <p>{{ .text }}</p>
+              </article>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+
+      <!-- Sidebar -->
+      {{ if not .Params.no_sidebar }}
+        <aside class="service-detail__sidebar">
+          {{ with .Params.sidebar }}
+            <div class="service-sidebar-card">
+              <h3>{{ .title | default "Quick Info" }}</h3>
+              <div class="service-sidebar-content">
+                {{ .content | safeHTML }}
+              </div>
+            </div>
+          {{ end }}
+        </aside>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Slider Section (if defined) -->
+{{ with .Params.gallery }}
+<section aria-label="{{ .section_title }}" class="section program-events-section">
+  <div class="container">
+    <div class="section-title reveal">
+      <p class="kicker">{{ .kicker }}</p>
+      <h2>{{ .section_title }}</h2>
+      <p>{{ .subtitle }}</p>
+    </div>
+    <div class="program-events-grid">
+      {{ range $g_idx, $gallery := .items }}
+        <article class="program-event-card reveal" data-event-section="{{ $gallery.id }}">
+          <div class="program-event-card__media">
+            <div aria-label="{{ $gallery.title }} slideshow" class="event-photo-slideshow" data-event-slideshow="">
+              {{ range $img_idx, $img := $gallery.images }}
+                <figure class="event-photo-slide {{ if eq $img_idx 0 }}is-active{{ end }}">
+                  <img alt="{{ $gallery.title }} photo {{ add $img_idx 1 }}" decoding="async" {{ if eq $img_idx 0 }}loading="eager"{{ else }}loading="lazy"{{ end }} src="{{ $img }}"/>
+                </figure>
+              {{ end }}
+            </div>
+            <div aria-label="Select a preview image" class="event-news-card__thumbs">
+              {{ range $img_idx, $img := $gallery.images }}
+                <button aria-label="Show preview image {{ add $img_idx 1 }} for {{ $gallery.title }}" class="event-gallery-thumb {{ if eq $img_idx 0 }}is-active{{ end }}" data-event-thumb-index="{{ $img_idx }}" type="button">
+                  <img alt="" aria-hidden="true" decoding="async" loading="lazy" src="{{ $img }}"/>
+                </button>
+              {{ end }}
+            </div>
+          </div>
+          <div class="program-event-card__caption">
+            <p class="kicker">{{ $gallery.kicker }}</p>
+            <h3>{{ $gallery.title }}</h3>
+            <p>{{ $gallery.description }}</p>
+            <button class="event-news-card__open" data-open-event-gallery="{{ $gallery.id }}" type="button">See full gallery</button>
+          </div>
+          <div class="event-full-gallery-source" hidden="" id="gallery-source-{{ $gallery.id }}">
+            <h3>{{ $gallery.title }}</h3>
+            <p>{{ $gallery.description }}</p>
+            <div class="event-full-gallery-source__items">
+              {{ range $img_idx, $img := $gallery.images }}
+                <button aria-label="Open image {{ add $img_idx 1 }} of {{ len $gallery.images }} from {{ $gallery.title }}" class="event-full-gallery__item" data-full-image-index="{{ $img_idx }}" type="button">
+                  <img alt="{{ $gallery.title }} photo {{ add $img_idx 1 }}" decoding="async" loading="lazy" src="{{ $img }}"/>
+                </button>
+              {{ end }}
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Modal templates -->
+<div aria-labelledby="eventGalleryModalTitle" aria-modal="true" class="event-gallery-modal" hidden="" id="eventGalleryModal" role="dialog">
+  <div class="event-gallery-modal__backdrop" data-close-event-gallery=""></div>
+  <div class="event-gallery-modal__panel" role="document">
+    <button aria-label="Close full gallery" class="event-gallery-modal__close" data-close-event-gallery="" type="button">×</button>
+    <header class="event-gallery-modal__header">
+      <p class="kicker">Full gallery</p>
+      <h2 id="eventGalleryModalTitle">Event gallery</h2>
+      <p id="eventGalleryModalCaption"></p>
+    </header>
+    <div class="event-gallery-modal__body" id="eventGalleryModalBody"></div>
+  </div>
+</div>
+<div aria-label="Expanded event image" aria-modal="true" class="event-image-lightbox" hidden="" id="eventImageLightbox" role="dialog">
+  <div class="event-image-lightbox__backdrop" data-close-event-image=""></div>
+  <div class="event-image-lightbox__panel" role="document">
+    <button aria-label="Close expanded image" class="event-image-lightbox__close" data-close-event-image="" type="button">×</button>
+    <button aria-label="Previous image" class="event-image-lightbox__nav event-image-lightbox__nav--prev" data-event-image-prev="" type="button">‹</button>
+    <figure>
+      <img alt="" id="eventImageLightboxImg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/%3E"/>
+      <figcaption id="eventImageLightboxCounter"></figcaption>
+    </figure>
+    <button aria-label="Next image" class="event-image-lightbox__nav event-image-lightbox__nav--next" data-event-image-next="" type="button">›</button>
+  </div>
+</div>
+{{ end }}
+{{ end }}

@@ -1,0 +1,25 @@
+title = "Kenya National Library Service"
+baseURL = "/"
+languageCode = "en-us"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "Kenya National Library Service"
+  
+  [params.contact]
+    phone = "+254 202 739 893"
+    phone_raw = "+254202739893"
+    email_communications = "corporatecommunications@knls.ac.ke"
+    email_complaints = "complaints@knls.ac.ke"
+    address = "Maktaba Kuu Building, Upper Hill, Nairobi"
+    hours = "Mon–Fri: 8:00AM–6:30PM | Sat: 8:30AM–5:00PM"
+
+  [params.social]
+    facebook = "https://www.facebook.com/KNLSKenya/"
+    instagram = "https://www.instagram.com/knlsmedia/"
+    linkedin = "https://www.linkedin.com/company/kenya-national-library-service/posts/?feedView=all"
+    tiktok = "https://www.tiktok.com/@knlsmedia"

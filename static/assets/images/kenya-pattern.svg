@@ -1,0 +1,14 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <pattern id="knlsPattern" width="90" height="90" patternUnits="userSpaceOnUse">
+    <rect width="90" height="90" fill="transparent"/>
+    <rect x="12" y="22" width="11" height="48" rx="4" fill="#ffffff" opacity=".13"/>
+    <rect x="30" y="14" width="11" height="56" rx="4" fill="#ffffff" opacity=".10"/>
+    <rect x="48" y="28" width="11" height="42" rx="4" fill="#ffffff" opacity=".14"/>
+    <rect x="66" y="18" width="11" height="52" rx="4" fill="#ffffff" opacity=".08"/>
+    <circle cx="15" cy="15" r="3" fill="#F4B400" opacity=".28"/>
+    <circle cx="75" cy="75" r="3" fill="#D62828" opacity=".20"/>
+  </pattern>
+</defs>
+<rect width="1200" height="600" fill="url(#knlsPattern)"/>
+</svg>

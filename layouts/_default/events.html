@@ -1,0 +1,72 @@
+{{ define "main" }}
+<section class="page-hero page-hero--events-photo">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section dynamic-cms-section">
+  <div class="container">
+    <div class="section-title section-title--center">
+      <p class="kicker">Upcoming events</p>
+      <h2>Published event updates</h2>
+      <p>Event notices added through the admin dashboard appear here automatically.</p>
+    </div>
+    <div data-dynamic-content="event" data-dynamic-limit="12"></div>
+  </div>
+</section>
+
+{{ with .Params.galleries }}
+  <section aria-label="Event photo galleries" class="section events-news-gallery" id="events-gallery">
+    <div class="container">
+      <div class="event-news-grid">
+        {{ range . }}
+          {{ $id := .id }}
+          {{ $title := .title }}
+          {{ $description := .description }}
+          {{ $images := .images }}
+          
+          <article class="event-news-card reveal" data-event-section="{{ $id }}">
+            <div class="event-news-card__media">
+              <div aria-label="Open full gallery for {{ $title }}" class="event-photo-slideshow" data-event-slideshow="" data-open-event-gallery="{{ $id }}" role="button" tabindex="0">
+                {{ range $idx, $img := $images }}
+                  <figure class="event-photo-slide{{ if eq $idx 0 }} is-active{{ end }}">
+                    <img alt="{{ $title }} photo {{ add $idx 1 }}" decoding="async" src="{{ $img }}" {{ if eq $idx 0 }}loading="eager"{{ else }}loading="lazy"{{ end }}/>
+                  </figure>
+                {{ end }}
+              </div>
+            </div>
+            
+            <div class="event-news-card__caption">
+              <h3 class="sr-only">{{ $title }}</h3>
+              <p>{{ $description }}</p>
+              <button class="event-news-card__open" data-open-event-gallery="{{ $id }}" type="button">See full gallery</button>
+            </div>
+            
+            <div class="event-full-gallery-source" hidden="" id="gallery-source-{{ $id }}">
+              <h3>{{ $title }}</h3>
+              <p>{{ $description }}</p>
+              <div class="event-full-gallery-source__items">
+                {{ range $idx, $img := $images }}
+                  <button aria-label="Open image {{ add $idx 1 }} of {{ len $images }} from {{ $title }}" class="event-full-gallery__item" data-full-image-index="{{ $idx }}" type="button">
+                    <img alt="{{ $title }} photo {{ add $idx 1 }}" decoding="async" loading="lazy" src="{{ $img }}"/>
+                  </button>
+                {{ end }}
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
+{{ end }}

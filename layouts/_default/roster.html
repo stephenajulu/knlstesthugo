@@ -1,0 +1,42 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="page-hero page-hero--who-we-are who-page-hero--compact">
+  <div class="container page-hero__inner">
+    <div>
+      <p class="kicker">{{ .Params.hero.kicker | default "About Us" }}</p>
+      <h1>{{ .Params.hero.title | default .Title }}</h1>
+      <p>{{ .Params.hero.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<!-- Roster Section -->
+<section class="section {{ if eq .Title "Board of Directors" }}board-section board-section--management-style{{ else }}management-section{{ end }}">
+  <div class="container">
+    <div class="section-title section-title--center reveal">
+      <p class="kicker">{{ .Params.hero.kicker }}</p>
+      <h2>{{ .Params.hero.title | default .Title }}</h2>
+      <p>{{ .Params.hero.subtitle }}</p>
+    </div>
+    
+    <div class="management-grid {{ if eq .Title "Board of Directors" }}board-management-grid{{ end }}">
+      {{ range .Params.roster }}
+        <article class="management-card {{ if eq $.Title "Board of Directors" }}board-management-card{{ end }} reveal">
+          <div class="management-card__photo">
+            <img alt="{{ .name }}" src="{{ .photo }}"/>
+          </div>
+          <div class="management-card__content">
+            <h3>{{ .name }}</h3>
+            <p>{{ .title }}</p>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

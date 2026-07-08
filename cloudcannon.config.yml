@@ -1,0 +1,204 @@
+# CloudCannon Configuration for Kenya National Library Service (KNLS) Website
+# This configuration configures editing interfaces, file paths, and collections for CloudCannon.
+
+# The relative path to the directory containing your project
+source: .
+
+# The directory where Hugo builds the site files (default is public)
+output: public
+
+# Paths configuration for assets and uploads
+paths:
+  uploads: static/assets/images
+  dam_uploads: static/assets/images
+  static: static
+
+# Define the collections of files that can be managed in CloudCannon
+collections_config:
+  pages:
+    name: Website Pages
+    path: content
+    output: true
+    icon: wysiwyg
+    parser: front-matter
+    filter:
+      extensions:
+        - md
+    # Group and order sidebar files
+    sort_options:
+      - key: title
+        order: asc
+        label: Title (A-Z)
+      - key: file_path
+        order: asc
+        label: File Path
+  data:
+    name: Navigation Menus
+    path: data
+    parser: yaml
+    icon: list
+    filter:
+      extensions:
+        - yml
+        - yaml
+
+# Configure how front matter fields are presented in the editing sidebar
+inputs:
+  title:
+    type: text
+    label: Page Title
+    comment: The main title displayed in search engines and page header.
+  description:
+    type: textarea
+    label: Meta Description
+    comment: Summarise the page content in 150-160 characters for SEO.
+  body_class:
+    type: select
+    label: Body Styling Class
+    comment: Determines layout and style variables for this page.
+    options:
+      values:
+        - home-page
+        - who-we-are-page
+        - service-tab-page
+        - data-center-page
+        - ecitizen-page
+        - awards-page
+        - organizational-structure-page
+        - national-reading-day-body
+        - page
+  data_timed_page:
+    type: text
+    label: Timed Page Event Key
+    comment: Key code used by JavaScript to activate timed-redirection (e.g., national-reading-day).
+  data_expiry_date:
+    type: datetime
+    label: Expiry Date & Time
+    comment: The expiration date after which the page redirects (ISO 8601 format).
+  data_expired_redirect:
+    type: text
+    label: Expired Redirect Path
+    comment: Root-relative path to redirect visitors to once the expiry date has passed (e.g. /events/#events-gallery).
+  main_class:
+    type: select
+    label: Main Element Class
+    comment: Custom CSS classes applied directly to the main content container.
+    options:
+      values:
+        - service-exact-main isbn-service-page
+        - service-rich-main
+        - service-detail-main
+        - e-resources-main
+        - e-resources-main e-resource-search-page
+        - who-we-are-page
+        - page
+
+# Editor interface layout customization
+editor:
+  default_view: visual
+  preview_paths:
+    - collection: pages
+      path: "{url}"
+
+# Build settings configuration
+build:
+  command: hugo
+  environment:
+    - HUGO_VERSION: 0.160.1
+
+# Hugo Shortcodes Mapping inside CloudCannon
+_snippets_imports:
+  hugo: true
+
+_snippets:
+  button:
+    template: hugo_shortcode_named_args
+    inline: true
+    preview:
+      text: "Link Button"
+      icon: "link"
+    definitions:
+      include_name: "button"
+      named_args:
+        - source_key: "href"
+          editor_key: "Url"
+          type: "string"
+        - source_key: "class"
+          editor_key: "Class"
+          type: "string"
+    _inputs:
+      Url:
+        type: "text"
+        label: "Link URL"
+        comment: "Destination page path, e.g. /isbn/ or /contacts/"
+      Class:
+        type: "select"
+        label: "Style Class"
+        options:
+          values:
+            - "btn btn--orange"
+            - "btn btn--outline"
+            - "btn"
+  alert:
+    template: hugo_shortcode_named_args
+    inline: false
+    preview:
+      text: "Alert / Notice Box"
+      icon: "warning"
+    definitions:
+      include_name: "alert"
+      named_args:
+        - source_key: "type"
+          editor_key: "Type"
+          type: "string"
+        - source_key: "title"
+          editor_key: "Title"
+          type: "string"
+    _inputs:
+      Type:
+        type: "select"
+        label: "Alert Type"
+        options:
+          values:
+            - "info"
+            - "warning"
+            - "success"
+      Title:
+        type: "text"
+        label: "Alert Title"
+        comment: "Optional bold heading for the notice"
+  faq_item:
+    template: hugo_shortcode_named_args
+    inline: false
+    preview:
+      text: "FAQ / Collapsible Accordion"
+      icon: "expand_more"
+    definitions:
+      include_name: "faq_item"
+      named_args:
+        - source_key: "question"
+          editor_key: "Question"
+          type: "string"
+    _inputs:
+      Question:
+        type: "text"
+        label: "FAQ Question"
+        comment: "The bold question that toggles the collapse panel"
+  youtube:
+    template: hugo_shortcode_named_args
+    inline: false
+    preview:
+      text: "YouTube Video Embed"
+      icon: "play_circle"
+    definitions:
+      include_name: "youtube"
+      named_args:
+        - source_key: "id"
+          editor_key: "VideoID"
+          type: "string"
+    _inputs:
+      VideoID:
+        type: "text"
+        label: "YouTube Video ID"
+        comment: "The alphanumeric ID of the video, e.g. dQw4w9WgXcQ"
+

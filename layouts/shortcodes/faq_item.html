@@ -1,0 +1,6 @@
+<details class="faq-item">
+  <summary class="faq-item__question"><strong>{{ .Get "question" }}</strong></summary>
+  <div class="faq-item__answer">
+    {{ .Inner | safeHTML }}
+  </div>
+</details>

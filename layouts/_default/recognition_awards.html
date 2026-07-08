@@ -1,0 +1,142 @@
+{{ define "main" }}
+<section class="page-hero awards-hero">
+  <div aria-hidden="true" class="awards-hero__glow awards-hero__glow--one"></div>
+  <div aria-hidden="true" class="awards-hero__glow awards-hero__glow--two"></div>
+  <div class="container page-hero__inner awards-hero__inner">
+    <div class="awards-hero__copy">
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+      <div aria-label="Awards page sections" class="awards-hero__actions">
+        <a class="btn btn--primary" href="#national-awards">National awards</a>
+        <a class="btn btn--outline awards-hero__outline" href="#international-awards">International recognition</a>
+      </div>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs awards-hero__breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section awards-overview-section">
+  <div class="container">
+    <div class="awards-intro-grid reveal">
+      {{ with .Params.overview }}
+        <article class="awards-intro-card awards-intro-card--feature">
+          <span aria-hidden="true" class="awards-medal">★</span>
+          <p class="kicker">{{ .kicker }}</p>
+          <h2>{{ .title }}</h2>
+          <p>{{ .text }}</p>
+        </article>
+      {{ end }}
+      
+      {{ with .Params.stats }}
+        <div aria-label="Recognition highlights" class="awards-stat-stack">
+          {{ range . }}
+            <article class="awards-stat-card">
+              <strong>{{ .metric }}</strong>
+              <span>{{ .label }}</span>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+    
+    {{ with .Params.spotlights }}
+      <div class="awards-spotlight-grid reveal" style="margin-top: 40px;">
+        {{ range . }}
+          <article class="award-spotlight-card">
+            <div aria-hidden="true" class="award-spotlight-card__icon">{{ partial "svg-icon.html" (dict "name" (or .icon "star")) }}</div>
+            <div>
+              <p class="kicker">{{ .kicker }}</p>
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section awards-section awards-national-section" id="national-awards">
+  <div class="container">
+    {{ with .Params.national_awards }}
+      <div class="section-title section-title--center reveal">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .subtitle }}</p>
+      </div>
+      <div aria-label="National Maktaba Awards by year" class="award-year-grid reveal">
+        {{ range .items }}
+          <article class="award-year-card award-year-card--static">
+            <div class="award-year-card__header">
+              <span>{{ .year }}</span>
+              <strong>{{ len .list }} recognitions</strong>
+            </div>
+            <ul>
+              {{ range .list }}
+                <li>{{ . | safeHTML }}</li>
+              {{ end }}
+            </ul>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section awards-section awards-international-section" id="international-awards">
+  <div class="container">
+    {{ with .Params.international_awards }}
+      <div class="section-title section-title--center reveal">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .subtitle }}</p>
+      </div>
+      <div class="international-awards-grid reveal">
+        {{ range .items }}
+          <article class="international-award-card{{ if .major }} international-award-card--major{{ end }}">
+            <span class="international-award-card__year">{{ .year }}</span>
+            <h3>{{ .title }}</h3>
+            {{ with .meta }}<p class="international-award-card__meta">{{ . }}</p>{{ end }}
+            {{ if .text }}<p>{{ .text | safeHTML }}</p>{{ end }}
+            {{ if .list }}
+              <ul>
+                {{ range .list }}
+                  <li>{{ . | safeHTML }}</li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section awards-context-section">
+  <div class="container">
+    <div class="awards-context-grid reveal">
+      {{ with .Params.context }}
+        <article class="awards-context-card">
+          <p class="kicker">{{ .kicker }}</p>
+          <h2>{{ .title }}</h2>
+          <p>{{ .text }}</p>
+        </article>
+      {{ end }}
+      
+      {{ with .Params.further_reading }}
+        <aside aria-label="Further reading links" class="awards-source-card">
+          <h3>{{ .title }}</h3>
+          {{ range .links }}
+            <a href="{{ .url }}" rel="noopener" target="_blank">{{ .label }}</a>
+          {{ end }}
+        </aside>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

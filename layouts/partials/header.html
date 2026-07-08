@@ -1,0 +1,85 @@
+<div class="top-strip">
+<div class="container top-strip__inner">
+<div class="top-strip__contact">
+<a href="tel:+254202739893">+254 202 739 893</a>
+<span aria-hidden="true">|</span>
+<a href="mailto:corporatecommunications@knls.ac.ke">corporatecommunications@knls.ac.ke</a>
+<span aria-hidden="true">|</span>
+<a href="mailto:complaints@knls.ac.ke">complaints@knls.ac.ke</a>
+</div>
+<div aria-label="Official quick links" class="top-strip__links">
+<a href="/careers/">Careers</a>
+<a href="/suppliers-portal/">Suppliers Portal</a>
+<a href="/apply-isbn-online/">Apply ISBN</a>
+<a href="http://librarycatalog.knls.ac.ke:8011/" rel="noopener" target="_blank">Browse our Catalog</a>
+<a href="/contacts/#faqs">FAQs</a>
+<a href="/staff-login/">Staff Login</a>
+</div>
+</div>
+</div>
+<header class="site-header">
+<nav aria-label="Primary navigation" class="container nav">
+<a aria-label='KNLS home' class='brand' href="/">
+<span aria-label="Republic of Kenya emblem" class="brand__republic-wrap">
+<img alt="Republic of Kenya" class="brand__republic-logo" src="/assets/images/nav/republic-of-kenya-composite.png"/>
+</span>
+<img alt="Kenya National Library Service logo" class="brand__logo" src="/assets/images/knls-logo-official.png"/>
+</a>
+<button aria-controls="primaryNav" aria-expanded="false" class="menu-toggle" type="button">
+<span class="menu-toggle__line"></span>
+<span class="menu-toggle__line"></span>
+<span class="menu-toggle__line"></span>
+<span class="sr-only">Toggle navigation</span>
+</button>
+<ul class="nav__list" id="primaryNav">
+  <li><a href="/" class="{{ if .IsHome }}is-active{{ end }}">Home</a></li>
+  {{ range hugo.Data.navigation.main_menu }}
+    {{ if .dropdown }}
+      <li class="nav__item nav__item--dropdown">
+        <button aria-expanded="false" class="nav__trigger" type="button">{{ .name }}<span>▾</span></button>
+        <ul class="dropdown">
+          {{ range .dropdown }}
+            {{ if .expiry }}
+              <li data-event-expiry="{{ .expiry }}"><a href="{{ .url }}" class="{{ if eq $.RelPermalink .url }}is-active{{ end }}">{{ .name }}</a></li>
+            {{ else }}
+              <li><a href="{{ .url }}" class="{{ if eq $.RelPermalink .url }}is-active{{ end }}">{{ .name }}</a></li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </li>
+    {{ else if .is_mega }}
+      <li class="nav__item nav__item--dropdown">
+        <button aria-expanded="false" class="nav__trigger" type="button">{{ .name }}<span>▾</span></button>
+        <ul class="dropdown dropdown--services dropdown--services-compact">
+          {{ range .groups }}
+            <li class="dropdown__group dropdown__group--collapsible">
+              <button aria-expanded="false" class="dropdown__group-title dropdown__group-toggle" type="button">{{ .title }} <span aria-hidden="true">▾</span></button>
+              <ul aria-label="{{ .title }}" class="dropdown__sub">
+                {{ range .items }}
+                  <li><a href="{{ .url }}" class="{{ if eq $.RelPermalink .url }}is-active{{ end }}">{{ .name }}</a></li>
+                {{ end }}
+              </ul>
+            </li>
+          {{ end }}
+          {{ range .flat_items }}
+            <li><a href="{{ .url }}" class="{{ if eq $.RelPermalink .url }}is-active{{ end }}">{{ .name }}</a></li>
+          {{ end }}
+        </ul>
+      </li>
+    {{ else }}
+      <li><a href="{{ .url }}" class="{{ if eq $.RelPermalink .url }}is-active{{ end }}">{{ .name }}</a></li>
+    {{ end }}
+  {{ end }}
+</ul>
+<button aria-label="Open site search" class="search-button" id="openSearch" type="button">⌕</button>
+</nav>
+</header>
+<div aria-labelledby="searchTitle" aria-modal="true" class="search-dialog" hidden="" id="searchDialog" role="dialog">
+<div class="search-dialog__panel">
+<button aria-label="Close search" class="search-dialog__close" id="closeSearch" type="button">×</button>
+<p class="kicker">Search KNLS website</p>
+<h2 id="searchTitle">Find KNLS pages quickly</h2>
+<input autocomplete="off" id="siteSearch" placeholder="Try ISBN, legal deposit, e-journals, tenders..." type="search"/>
+<div class="search-results" id="searchResults" role="list"></div>
+</div>
+</div>

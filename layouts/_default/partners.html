@@ -1,0 +1,66 @@
+{{ define "main" }}
+<section class="page-hero partners-hero">
+  <div class="container page-hero__inner partners-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+    
+    {{ with .Params.partner_logos }}
+      <div aria-hidden="true" class="partner-logo-ribbon partners-hero__ribbon">
+        <div aria-hidden="true" class="partner-logo-ribbon__fade partner-logo-ribbon__fade--left"></div>
+        <div aria-hidden="true" class="partner-logo-ribbon__fade partner-logo-ribbon__fade--right"></div>
+        <div class="partner-logo-ribbon__track">
+          <!-- Marquee Track Group 1 -->
+          <div class="partner-logo-ribbon__group">
+            {{ range . }}
+              <a aria-label="Visit {{ .name }} website" href="{{ .url }}" rel="noopener" tabindex="-1" target="_blank">
+                <img alt="{{ .name }} logo" src="{{ .logo }}"/>
+              </a>
+            {{ end }}
+          </div>
+          <!-- Marquee Track Group 2 (Visual Marquee Loop Duplicate) -->
+          <div aria-hidden="true" class="partner-logo-ribbon__group">
+            {{ range . }}
+              <a aria-label="Visit {{ .name }} website" href="{{ .url }}" rel="noopener" tabindex="-1" target="_blank">
+                <img alt="{{ .name }} logo" src="{{ .logo }}"/>
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section partners-story-section">
+  <div class="container">
+    {{ if .Content }}
+      <div class="partners-content-body">
+        {{ .Content }}
+      </div>
+    {{ end }}
+    
+    {{ with .Params.collaborators }}
+      <div class="partners-collaborators-list" style="margin-top: 40px;">
+        <h2>{{ .title }}</h2>
+        <p>{{ .subtitle }}</p>
+        <div class="partners-collaborators-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 24px;">
+          {{ range .items }}
+            <article class="collaborator-card" style="background: #fdfdfd; padding: 20px; border-radius: 12px; border: 1px solid #f0f0f0; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

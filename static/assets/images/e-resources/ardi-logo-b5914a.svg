@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="96" viewBox="0 0 240 96" role="img" aria-labelledby="title">
+  <title>ARDI logo</title>
+  <rect x="3" y="3" width="234" height="90" rx="18" fill="#ffffff" stroke="#e4e4f2" stroke-width="2"/>
+  <rect x="16" y="24" width="48" height="48" rx="14" fill="#6f2c91" opacity="0.10"/>
+  <circle cx="40" cy="48" r="16" fill="#6f2c91"/>
+  <path d="M31 49c7-9 13-9 20 0M31 56c7-7 13-7 20 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="40" cy="34" r="4" fill="#FE5000"/>
+  <text x="108" y="57" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800" fill="#6f2c91">ARDI</text>
+  <rect x="184" y="22" width="6" height="52" rx="3" fill="#FE5000" opacity="0.88"/>
+</svg>

@@ -1,0 +1,87 @@
+{{ define "main" }}
+<section class="page-hero e-resources-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/e-resources/">E-Resources</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+{{ partial "e-resources-nav.html" . }}
+
+<section class="section e-resource-browser-section">
+  <div class="container e-resource-browser" data-resource-filter="">
+    {{ with .Params.overview }}
+      <div class="e-resource-browser__intro">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .text }}</p>
+        {{ with .helper }}
+          <div class="e-resource-page-helper">
+            {{ .text | safeHTML }}
+            {{ if .link_url }}<a href="{{ .link_url }}">{{ .link_label }}</a>{{ end }}
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+    
+    <div class="e-resource-toolbar" role="search">
+      <label class="sr-only" for="resourceSearch">Search resources</label>
+      <input autocomplete="off" data-resource-search="" id="resourceSearch" placeholder="Search by database, subject or provider..." type="search"/>
+      <p class="e-resource-count" data-resource-count="">Loading resources...</p>
+    </div>
+    
+    <div class="e-resource-actions" data-resource-actions="">
+      <span>Category view</span>
+      <button data-resource-collapse-all="" type="button">Collapse all</button>
+      <button data-resource-expand-all="" type="button">Expand visible</button>
+    </div>
+    
+    <div class="e-resource-category-list">
+      {{ range .Params.categories }}
+        <details class="e-resource-category-group reveal" data-resource-group="true" open="">
+          <summary>
+            <span>{{ .name }}</span>
+            <small>{{ len .items }} resources</small>
+          </summary>
+          <div class="e-resource-grid">
+            {{ range .items }}
+              <article class="e-resource-card reveal" data-resource-card="" data-tags="{{ .tags | default "" }}">
+                <div class="e-resource-card__body">
+                  <div class="e-resource-card__top">
+                    {{ if .logo }}
+                      <a aria-label="Open {{ .title }}" class="e-resource-card__logo-link" href="{{ .url }}" rel="noopener" target="_blank">
+                        <img alt="{{ .title }} logo" class="official-er-logo" height="56" loading="lazy" src="{{ .logo }}" width="56" onerror="this.onerror=null;this.src='/assets/images/e-resource-logo-fallback-icon.svg';"/>
+                      </a>
+                    {{ end }}
+                  </div>
+                  <h3><a href="{{ .url }}" rel="noopener" target="_blank">{{ .title }}</a></h3>
+                  <p>{{ .summary }}</p>
+                  {{ if .note }}
+                    <span class="e-resource-card__meta">{{ .note }}</span>
+                  {{ end }}
+                </div>
+                <div class="e-resource-card__actions">
+                  <a class="btn btn--orange" href="{{ .url }}" rel="noopener" target="_blank">Access resource</a>
+                  {{ if .guide_url }}
+                    <a class="btn btn--outline" href="{{ .guide_url }}">User Guide</a>
+                  {{ end }}
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        </details>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

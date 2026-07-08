@@ -1,0 +1,84 @@
+{{ define "main" }}
+<section class="page-hero service-exact-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle | default .Params.description }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/services/">Our Services</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section service-exact-section service-exact-section--cream">
+  <div class="container">
+    {{ with .Params.overview }}
+      <article class="service-exact-panel reveal" style="padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.02);">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .text | safeHTML }}</p>
+      </article>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section knb-browser-section">
+  <div class="container">
+    {{ with .Params.archive }}
+      <div class="knb-browser-intro">
+        <div>
+          <p class="kicker">{{ .kicker }}</p>
+          <h2>{{ .title }}</h2>
+          <p>{{ .text }}</p>
+        </div>
+      </div>
+    {{ end }}
+    
+    <div aria-label="Bibliography filters" class="knb-browser-toolbar">
+      <label class="sr-only" for="knbSearch">Search bibliography</label>
+      <input data-knb-search="" id="knbSearch" placeholder="Search by year or file, for example 2018 or preliminary" type="search"/>
+      
+      <div aria-label="Filter by document type" class="knb-type-tabs" role="group">
+        <button class="is-active" data-knb-filter-type="all" type="button">All</button>
+        <button data-knb-filter-type="final" type="button">Final</button>
+        <button data-knb-filter-type="preliminary" type="button">Preliminary Pages</button>
+      </div>
+      
+      <div aria-label="Filter by decade" class="knb-decade-tabs" role="group">
+        <button class="is-active" data-knb-filter-decade="all" type="button">All decades</button>
+        <button data-knb-filter-decade="2010s" type="button">2010s</button>
+        <button data-knb-filter-decade="2000s" type="button">2000s</button>
+        <button data-knb-filter-decade="1990s" type="button">1990s</button>
+        <button data-knb-filter-decade="1980s" type="button">1980s</button>
+      </div>
+    </div>
+    
+    <div aria-label="Quick year filter" class="knb-year-strip">
+      <button class="knb-year-chip is-active" data-knb-filter-year="all" type="button">All years</button>
+      {{ range .Params.years }}
+        <button class="knb-year-chip" data-knb-filter-year="{{ . }}" type="button">{{ . }}</button>
+      {{ end }}
+    </div>
+    
+    <div class="knb-grid">
+      {{ range .Params.items }}
+        <article class="knb-card reveal" data-knb-card="" data-year="{{ .year }}" data-decade="{{ .decade }}" data-type="{{ .type }}">
+          <div class="knb-card__body">
+            <h3>{{ .title }}</h3>
+            <p>Year: {{ .year }} | Category: {{ .type | title }}</p>
+          </div>
+          <div class="knb-card__actions">
+            <a class="btn btn--orange" download href="{{ .file_url }}">Download</a>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

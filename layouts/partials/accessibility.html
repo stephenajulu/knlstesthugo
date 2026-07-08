@@ -1,0 +1,27 @@
+<div class="accessibility-widget" data-accessibility-widget="">
+<button aria-controls="accessibilityPanel" aria-expanded="false" class="accessibility-toggle" type="button">
+<span aria-hidden="true">♿</span>
+<span>Accessibility</span>
+</button>
+<div class="accessibility-panel" hidden="" id="accessibilityPanel">
+<div class="accessibility-panel__header">
+<strong>Accessibility options</strong>
+<button aria-label="Close accessibility options" class="accessibility-close" data-accessibility-close="" type="button">×</button>
+</div>
+<div aria-label="Visual display options" class="accessibility-group">
+<button data-access-action="screen-reader" type="button">Screen reader mode</button>
+<button data-access-action="contrast" type="button">High contrast</button>
+<button data-access-action="dark" type="button">Dark mode</button>
+<button data-access-action="light" type="button">Light mode</button>
+</div>
+<div aria-label="Font size controls" class="accessibility-group accessibility-font-controls">
+<button data-access-action="decrease-font" type="button">A−</button>
+<button data-access-action="reset-font" type="button">Reset text</button>
+<button data-access-action="increase-font" type="button">A+</button>
+</div>
+<p class="accessibility-note">
+        Use these controls to increase text size, switch contrast, or improve screen-reader navigation.
+      </p>
+</div>
+<div aria-live="polite" class="sr-only" id="accessibilityStatus"></div>
+</div>

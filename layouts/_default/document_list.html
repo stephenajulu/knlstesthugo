@@ -1,0 +1,44 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section strategic-section">
+  <div class="container">
+    {{ if .Content }}
+      <div class="section-content-text" style="margin-bottom: 40px;">
+        {{ .Content }}
+      </div>
+    {{ end }}
+    
+    {{ with .Params.documents }}
+      <div class="document-grid">
+        {{ range . }}
+          <article class="document-card reveal">
+            {{ if .cover }}
+              <div class="document-card__cover"><img alt="{{ .title }} cover" src="{{ .cover }}"/></div>
+            {{ end }}
+            <div class="document-card__body">
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+              {{ with .meta }}<span class="document-card__meta">{{ . }}</span>{{ end }}
+            </div>
+            <a class="btn btn--orange" download="" href="{{ .url }}">Download</a>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

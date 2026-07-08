@@ -1,0 +1,33 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle | default .Params.description }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="card-grid">
+      {{ range site.RegularPages }}
+        {{ if and (not .Params.private) (ne .Type "json") }}
+          <article class="link-card reveal">
+            <div aria-hidden="true" class="link-card__icon">{{ partial "svg-icon.html" (dict "name" (or .Params.icon "star")) }}</div>
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description | default .Summary }}</p>
+            <a href="{{ .RelPermalink }}">Open page <span aria-hidden="true">→</span></a>
+          </article>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,40 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+<section class="section dynamic-cms-section">
+  <div class="container">
+    <div class="section-title section-title--center">
+      <p class="kicker">Procurement updates</p>
+      <h2>Published tenders</h2>
+      <p>Current tender notices added through the admin dashboard appear here automatically.</p>
+    </div>
+    <div data-dynamic-content="tender" data-dynamic-limit="20"></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container two-column">
+    <article class="content-panel reveal">
+      <p class="kicker">Overview</p>
+      <h2 class="sr-only">Tenders</h2>
+      <p>{{ .Params.description }}</p>
+      <p>This page provides clear access to the relevant KNLS information and service pathway.</p>
+      <div class="button-row">
+        <a class='btn btn--green' href="/contacts/">Contact KNLS</a>
+        <a class='btn btn--outline' href="/sitemap/">View all pages</a>
+      </div>
+    </article>
+  </div>
+</section>
+{{ end }}

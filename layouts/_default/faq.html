@@ -1,0 +1,42 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="page-hero service-exact-hero">
+  <div class="container page-hero__inner">
+    <div>
+      <p class="kicker">{{ .Params.hero.kicker | default "Bibliographic Services" }}</p>
+      <h1>{{ .Params.hero.title | default .Title }}</h1>
+      <p>{{ .Params.hero.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      {{ if .Params.hero.parent_url }}
+        <a href="{{ .Params.hero.parent_url }}">{{ .Params.hero.parent_title }}</a>
+        <span aria-hidden="true">/</span>
+      {{ end }}
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<!-- FAQs Section -->
+<section class="section faqs-section">
+  <div class="container container--narrow">
+    <div class="section-title reveal">
+      <p class="kicker">{{ .Params.faq.kicker | default "Frequently Asked Questions" }}</p>
+      <h2>{{ .Params.faq.title | default "FAQ" }}</h2>
+    </div>
+    
+    <div class="faq-list">
+      {{ range .Params.faq.items }}
+        <details class="faq-item reveal">
+          <summary class="faq-item__question"><strong>{{ .question }}</strong></summary>
+          <div class="faq-item__answer">
+            {{ .answer | safeHTML }}
+          </div>
+        </details>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

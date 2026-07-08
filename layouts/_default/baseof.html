@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="{{ .Params.body_class | default "page" }}"
+  {{ if .Params.data_timed_page }}data-timed-page="{{ .Params.data_timed_page }}"{{ end }}
+  {{ if .Params.data_expiry_date }}data-expiry-date="{{ .Params.data_expiry_date }}"{{ end }}
+  {{ if .Params.data_expired_redirect }}data-expired-redirect="{{ .Params.data_expired_redirect }}"{{ end }}>
+  
+  {{ partial "accessibility.html" . }}
+  {{ partial "page-loader.html" . }}
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  {{ partial "header.html" . }}
+  
+  <main id="main-content" {{ with .Params.main_class }}class="{{ . }}"{{ end }}>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "public-notice.html" . }}
+  {{ partial "chatbot.html" . }}
+  {{ partial "footer.html" . }}
+  
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

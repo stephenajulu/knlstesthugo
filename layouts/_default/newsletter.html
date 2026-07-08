@@ -1,0 +1,65 @@
+{{ define "main" }}
+<section class="page-hero news-bulletin-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle | default .Params.description }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/media-center/">Media Center</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section class="section dynamic-cms-section">
+  <div class="container">
+    <div class="section-title section-title--center">
+      <p class="kicker">Latest newsletters</p>
+      <h2>Published newsletter issues</h2>
+      <p>Newsletter issues added through the admin dashboard appear here automatically.</p>
+    </div>
+    <div data-dynamic-content="newsletter" data-dynamic-limit="12"></div>
+  </div>
+</section>
+
+<section class="section news-bulletin-section">
+  <div class="container">
+    {{ with .Params.lead_bulletin }}
+      <div class="bulletin-lead">
+        <div class="bulletin-lead__copy">
+          <p class="kicker">{{ .kicker }}</p>
+          <h2>{{ .title }}</h2>
+          <p>{{ .text }}</p>
+          <div class="button-row">
+            <a class="btn btn--orange" download="" href="{{ .file_url }}">Download Lead Bulletin</a>
+            <a class="btn btn--blue" href="{{ .file_url }}" rel="noopener" target="_blank">Open Bulletin PDF</a>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    
+    {{ with .Params.bulletins }}
+      <div class="bulletin-list" style="margin-top: 40px;">
+        <h2>Older Bulletins</h2>
+        <div class="bulletin-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 24px;">
+          {{ range . }}
+            <article class="bulletin-card" style="background: #fdfdfd; padding: 20px; border-radius: 12px; border: 1px solid #f0f0f0;">
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+              <div class="button-row" style="margin-top: 15px; display: flex; gap: 10px;">
+                <a class="btn btn--orange btn--sm" download href="{{ .file_url }}">Download</a>
+                <a class="btn btn--outline btn--sm" href="{{ .file_url }}" target="_blank">View</a>
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

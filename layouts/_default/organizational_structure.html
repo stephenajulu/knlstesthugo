@@ -1,0 +1,59 @@
+{{ define "main" }}
+<section class="page-hero page-hero--org-visual">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle | default .Params.description }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+{{ with .Params.chart }}
+<section aria-labelledby="orgStructureTitle" class="section knls-org-section">
+  <div class="container knls-org-container">
+    <div class="knls-org-heading reveal">
+      <p class="kicker">Reporting structure</p>
+      <h2 id="orgStructureTitle">KNLS Organizational Structure</h2>
+      <p>Governance, executive leadership, directorates and departments presented in a clear reporting hierarchy.</p>
+    </div>
+    <div aria-label="KNLS organizational structure chart" class="knls-org-chart reveal">
+      <div aria-hidden="true" class="knls-org-chart__watermark"></div>
+      
+      <div aria-label="Governance level" class="knls-org-governance">
+        {{ with .board }}<article class="knls-org-card knls-org-card--primary knls-org-card--board">{{ . }}</article>{{ end }}
+        {{ with .audit_committee }}<article class="knls-org-card knls-org-card--outline knls-org-card--committee">{{ . }}</article>{{ end }}
+      </div>
+      
+      <div aria-label="Executive leadership" class="knls-org-executive">
+        {{ with .executive }}<article class="knls-org-card knls-org-card--executive">{{ . }}</article>{{ end }}
+      </div>
+      
+      <div aria-label="Directorates and departments" class="knls-org-reporting">
+        {{ range .standalone_departments }}
+          <section aria-label="{{ . }}" class="knls-org-group knls-org-group--standalone">
+            <article class="knls-org-card knls-org-card--department">{{ . }}</article>
+          </section>
+        {{ end }}
+        
+        {{ range .directorates }}
+          <section aria-label="{{ .name }}" class="knls-org-group">
+            <article class="knls-org-card knls-org-card--directorate">{{ .name }}</article>
+            <div class="knls-org-children">
+              {{ range .departments }}
+                <article class="knls-org-card knls-org-card--department">{{ . }}</article>
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

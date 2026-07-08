@@ -1,0 +1,61 @@
+{{ define "main" }}
+<section class="page-hero e-resources-hero">
+  <div class="container page-hero__inner">
+    <div>
+      {{ with .Params.kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.subtitle }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+{{ partial "e-resources-nav.html" . }}
+
+<section class="section e-resource-overview-section">
+  <div class="container">
+    {{ with .Params.overview }}
+      <div class="e-resource-overview-panel reveal">
+        <div>
+          <p class="kicker">{{ .kicker }}</p>
+          <h2>{{ .title }}</h2>
+          <p>{{ .text }}</p>
+        </div>
+      </div>
+    {{ end }}
+    
+    {{ with .Params.provider_strip }}
+      <div aria-label="Featured e-resource provider links" class="e-resource-logo-strip reveal">
+        <div class="e-resource-logo-strip__head">
+          <strong>{{ .title }}</strong>
+          <span>{{ .subtitle }}</span>
+        </div>
+        <div class="e-resource-logo-strip__grid">
+          {{ range .providers }}
+            <a aria-label="Open {{ .name }}" href="{{ .url }}" rel="noopener" target="_blank">
+              <img alt="{{ .name }} logo" class="official-er-logo" height="42" loading="lazy" src="{{ .logo }}" width="42"/>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+    
+    {{ with .Params.categories }}
+      <div class="e-resource-directory-grid">
+        {{ range . }}
+          <article class="e-resource-directory-card reveal">
+            <span class="e-resource-directory-card__icon">{{ partial "svg-icon.html" (dict "name" .icon) }}</span>
+            <h3>{{ .title }}</h3>
+            <p>{{ .text }}</p>
+            <a href="{{ .url }}">{{ .button_text }} <span aria-hidden="true">→</span></a>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,163 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="page-hero contact-page-hero">
+  <div class="container page-hero__inner">
+    <div>
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Description }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<!-- Contact Quick Grid Section -->
+<section class="section contact-overview-section">
+  <div class="container">
+    <div class="contact-quick-grid">
+      {{ range .Params.quick_info }}
+        <article class="contact-quick-card">
+          <span aria-hidden="true">{{ partial "svg-icon.html" (dict "name" .icon) }}</span>
+          <div>
+            <strong>{{ .title }}</strong>
+            <p>{{ .text | safeHTML }}</p>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Locations Section -->
+<section class="section contact-locations-section">
+  <div class="container">
+    <div class="section-title section-title--center compact-title">
+      <p class="kicker">{{ .Params.locations_section.kicker }}</p>
+      <h2>{{ .Params.locations_section.title }}</h2>
+      <p>{{ .Params.locations_section.subtitle }}</p>
+    </div>
+    <div class="contact-location-grid">
+      {{ range .Params.locations }}
+        <article class="contact-location-card {{ if .is_hq }}contact-location-card--hq{{ end }}">
+          <figure class="contact-location-card__image">
+            <img alt="{{ .image_alt }}" src="{{ .image }}"/>
+          </figure>
+          <div class="contact-location-card__body">
+            <div class="contact-location-card__header">
+              <p class="kicker">{{ .kicker }}</p>
+              <h3>{{ .title }}</h3>
+            </div>
+            <ul class="contact-detail-list">
+              {{ range .details }}
+                <li><strong>{{ .label }}</strong><span>{{ .value | safeHTML }}</span></li>
+              {{ end }}
+            </ul>
+            <a class="map-link" href="{{ .map_url }}" rel="noopener" target="_blank">Open in Google Maps <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="contact-map">
+            <iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="{{ .map_embed_url }}" title="{{ .map_title }}"></iframe>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Feedback Form Section -->
+<section class="section contact-form-section">
+  <div class="container contact-form-panel">
+    <div class="section-title section-title--center compact-title">
+      <p class="kicker">Feedback and enquiries</p>
+      <h2>Send us a message</h2>
+      <p>Have questions or comments? Fill out the form below and we will get back to you.</p>
+    </div>
+    <form class="contact-form" id="contactForm" method="POST">
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input id="name" name="name" required="" type="text"/>
+          <small class="error"></small>
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" required="" type="email"/>
+          <small class="error"></small>
+        </div>
+        <div class="form-row">
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option>General enquiry</option>
+            <option>ISBN</option>
+            <option>Legal deposit</option>
+            <option>E-resources</option>
+            <option>Digitization</option>
+            <option>Data Centre</option>
+            <option>Complaints</option>
+          </select>
+        </div>
+        <div class="form-row form-row--full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required="" rows="4"></textarea>
+          <small class="error"></small>
+        </div>
+      </div>
+      <button class="btn btn--green" type="submit">Send message</button>
+      <p aria-live="polite" class="form-message" id="contactMessage"></p>
+    </form>
+  </div>
+</section>
+
+<!-- FAQs Section -->
+<section class="section contact-faq-section" id="faqs">
+  <div class="container contact-faq-panel">
+    <div class="section-title section-title--center compact-title">
+      <p class="kicker">Frequently asked questions</p>
+      <h2>Quick answers before you contact us</h2>
+      <p>Browse common questions about KNLS services. You can still send us a message if you need more help.</p>
+    </div>
+    <div class="contact-faq-list">
+      {{ range $index, $faq := .Params.faqs }}
+        <details class="contact-faq-card reveal" {{ if eq $index 0 }}open{{ end }}>
+          <summary>{{ .question }}</summary>
+          <p>{{ .answer | safeHTML }}</p>
+        </details>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Social Section -->
+<section class="section contact-social-section contact-social-section--compact">
+  <div class="container contact-social-panel">
+    <div class="section-title section-title--center">
+      <h2>Connect with us</h2>
+      <p>Follow our official media channels to ask questions and stay updated.</p>
+    </div>
+    <div aria-label="Official communication channels" class="contact-social-grid">
+      <a aria-label="Visit KNLS Facebook page" class="contact-social-card contact-facebook" href="{{ site.Params.social.facebook }}" rel="noopener" target="_blank">
+        <span aria-hidden="true">f</span>
+        <strong>Facebook</strong>
+        <small>@KNLSKenya</small>
+      </a>
+      <a aria-label="Visit KNLS Instagram page" class="contact-social-card contact-instagram" href="{{ site.Params.social.instagram }}" rel="noopener" target="_blank">
+        <span class="instagram-icon-wrap" aria-hidden="true"><img alt="" class="instagram-app-icon" src="/assets/images/social/instagram-app-icon.svg"/></span>
+        <strong>Instagram</strong>
+        <small>@knlsmedia</small>
+      </a>
+      <a aria-label="Visit KNLS LinkedIn page" class="contact-social-card contact-linkedin" href="{{ site.Params.social.linkedin }}" rel="noopener" target="_blank">
+        <span aria-hidden="true">in</span>
+        <strong>LinkedIn</strong>
+        <small>Kenya National Library Service</small>
+      </a>
+      <a aria-label="Visit KNLS TikTok page" class="contact-social-card contact-tiktok" href="{{ site.Params.social.tiktok }}" rel="noopener" target="_blank">
+        <span aria-hidden="true">♪</span>
+        <strong>TikTok</strong>
+        <small>@knlsmedia</small>
+      </a>
+    </div>
+  </div>
+</section>
+{{ end }}

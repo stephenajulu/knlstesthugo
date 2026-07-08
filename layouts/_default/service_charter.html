@@ -1,0 +1,97 @@
+{{ define "main" }}
+<section class="page-hero service-charter-hero citizen-charter-hero">
+  <div class="container page-hero__inner">
+    <div>
+      <p class="kicker">About Us</p>
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Params.description }}</p>
+    </div>
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>{{ .Title }}</span>
+    </nav>
+  </div>
+</section>
+
+<section aria-label="Citizen Service Delivery Charter quick navigation" class="citizen-charter-nav-wrap">
+  <div class="container citizen-charter-nav">
+    <a href="#overview">Overview</a>
+    <a href="#downloads">Downloads</a>
+    <a href="#videos">Accessible formats</a>
+  </div>
+</section>
+
+<section class="section citizen-charter-overview" id="overview">
+  <div class="container citizen-charter-intro">
+    <article class="citizen-charter-copy reveal">
+      {{ with .Params.overview }}
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .text | safeHTML }}</p>
+      {{ end }}
+    </article>
+  </div>
+</section>
+
+<section class="section section--cream citizen-charter-downloads" id="downloads">
+  <div class="container">
+    {{ with .Params.downloads }}
+      <div class="section-title section-title--center reveal">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .subtitle }}</p>
+      </div>
+      <div class="citizen-charter-document-grid">
+        {{ range .items }}
+          <article class="citizen-charter-document-card reveal">
+            <div class="document-card__icon">PDF</div>
+            <div>
+              <h3>{{ .title }}</h3>
+              <p>{{ .text }}</p>
+              <span class="document-card__meta">{{ .meta | default "PDF document" }}</span>
+            </div>
+            <a class="btn btn--orange" download href="{{ .url }}">Download</a>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section citizen-charter-videos" id="videos">
+  <div class="container">
+    {{ with .Params.videos }}
+      <div class="section-title section-title--center reveal">
+        <p class="kicker">{{ .kicker }}</p>
+        <h2>{{ .title }}</h2>
+        <p>{{ .subtitle }}</p>
+      </div>
+      <div class="citizen-charter-video-grid">
+        {{ range .items }}
+          <article class="video-card reveal">
+            <div class="video-frame">
+              <iframe
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen=""
+                class="youtube-thumb-embed"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                src="https://www.youtube.com/embed/{{ .embed_id }}"
+                srcdoc='<style>
+                  *{box-sizing:border-box}body{margin:0;background:#10069F;font-family:Arial,sans-serif}a{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;text-decoration:none;background:linear-gradient(135deg,rgba(16,6,159,.38),rgba(254,80,0,.22)),url(https://i.ytimg.com/vi/{{ .embed_id }}/hqdefault.jpg) center/cover no-repeat}a:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.42))}span{position:relative;width:72px;height:52px;border-radius:17px;background:#FE5000;box-shadow:0 16px 35px rgba(0,0,0,.3);display:grid;place-items:center}span:after{content:"";margin-left:5px;border-left:17px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}em{position:absolute;left:16px;bottom:14px;right:16px;color:white;font-style:normal;font-size:14px;font-weight:800;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+                </style><a href="https://www.youtube.com/embed/{{ .embed_id }}?autoplay=1&amp;rel=0" aria-label="Play {{ .title }}"><span aria-hidden="true"></span><em>{{ .title }}</em></a>'
+                title="{{ .title }}">
+              </iframe>
+            </div>
+            <div class="video-card__body">
+              <h3>{{ .title }}</h3>
+              <a class="video-fallback-link" href="{{ .youtube_url }}" rel="noopener" target="_blank">Open on YouTube</a>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

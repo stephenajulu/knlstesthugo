@@ -41,8 +41,7 @@ The website maintains accessibility conformance using semantic elements and user
   - **Contrast Options**: Switches to a high-contrast theme class.
   - **Size Toggles**: Supports text resizing (A-, Reset, A+) for low-vision readers.
   - **Aria Attributes**: Synchronizes screen announcement states using `aria-live="polite"` and `aria-expanded` toggle states.
-  - **Premium Floating Left Tab (Desktops)**: Fixed to the middle-left edge (`top: 50%; left: 0`) as a rounded tab. Slides out on hover to prevent overlapping the header nav links or chatbot.
-  - **Mobile Corner Positioning**: Automatically moves to the right edge at `bottom: 150px` on mobile screens to float cleanly above the chatbot window.
+  - **Premium Floating Corner Tab**: Fixed to the bottom-left corner of the viewport (`bottom: 24px; left: 24px` on desktop, `bottom: 20px; left: 20px` on mobile). It uses a fully rounded toggle button that expands horizontally on hover, and opens the panel upwards (`bottom: 60px; left: 0`), preventing any overlap with navigation elements or the chatbot.
 - **Search Panel Accessibility**:
   The site-wide search dialog uses proper `aria-labelledby`, `role="dialog"`, and `aria-modal="true"` tags to constrain keyboard focus when open. Pressing the `Escape` key closes the dialog automatically.
 - **Keyboard Navigation Controls**:

@@ -73,6 +73,7 @@ def main():
     if access_match:
         access_html = access_match.group(1)
         access_html = replace_relative_links(access_html)
+        access_html = access_html.replace('<span aria-hidden="true">♿</span>', '{{ partial "svg-icon.html" (dict "name" "wheelbarrow") }}')
         write_file(os.path.join(partials_dir, "accessibility.html"), access_html)
         print("Extracted accessibility.html partial.")
 

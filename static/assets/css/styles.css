@@ -29565,9 +29565,8 @@ body.dark-mode .nrd-coverflow {
    ========================================================= */
 .accessibility-widget {
   position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  bottom: 24px;
+  left: 24px;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -29580,12 +29579,12 @@ body.dark-mode .nrd-coverflow {
   align-items: center;
   gap: 0;
   padding: 10px;
-  border-radius: 0 50px 50px 0;
+  border-radius: 50px;
   background: #10069F;
   color: #ffffff;
   border: none;
   cursor: pointer;
-  box-shadow: 4px 0 16px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   max-width: 44px;
@@ -29625,8 +29624,8 @@ body.dark-mode .nrd-coverflow {
 /* Slide up panel options styling */
 .accessibility-panel {
   position: absolute;
-  top: 50px;
-  left: 10px;
+  bottom: 60px;
+  left: 0;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.2);
@@ -29638,21 +29637,12 @@ body.dark-mode .nrd-coverflow {
 
 @media (max-width: 480px) {
   .accessibility-widget {
-    top: auto;
-    bottom: 150px; /* Float above the chatbot on mobile */
-    left: auto;
-    right: 20px;
-    transform: none;
-    align-items: flex-end;
-  }
-  .accessibility-toggle {
-    border-radius: 50px;
+    bottom: 20px;
+    left: 20px;
   }
   .accessibility-panel {
-    top: auto;
     bottom: 60px;
-    left: auto;
-    right: -10px;
+    left: 0;
     width: 280px;
   }
 }

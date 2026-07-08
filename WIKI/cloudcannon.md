@@ -95,3 +95,14 @@ To enable non-technical content managers to add styled elements easily without w
 
 When editors click the **"+" (Insert Snippet)** menu in the visual editor toolbar, they can select these options, fill out simple form fields (URLs, titles, dropdowns), and the CMS will write the correct shortcode syntax behind the scenes automatically.
 
+---
+
+## 6. Site Dashboard Onboarding (.cloudcannon/README.md)
+
+To provide a friendly, non-technical landing experience for content editors upon logging into CloudCannon, we configured a custom Site Dashboard README.
+
+*   **Location**: `.cloudcannon/README.md`
+*   **Behavior**: CloudCannon reads this file and automatically renders the formatted markdown instructions on the main **Summary** tab of the project dashboard.
+*   **Content**: It contains step-by-step guidance on editing pages, modifying the navigation structure via `navigation.yml`, inserting visual shortcode Snippets, and how the automatic commit-and-deploy cycle triggers Netlify builds.
+
+

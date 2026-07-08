@@ -292,7 +292,7 @@ def make_header_dynamic(header_html):
         
     dynamic_loop = """<ul class="nav__list" id="primaryNav">
   <li><a href="/" class="{{ if .IsHome }}is-active{{ end }}">Home</a></li>
-  {{ range hugo.Data.navigation.main_menu }}
+  {{ range site.Data.navigation.main_menu }}
     {{ if .dropdown }}
       <li class="nav__item nav__item--dropdown">
         <button aria-expanded="false" class="nav__trigger" type="button">{{ .name }}<span>▾</span></button>

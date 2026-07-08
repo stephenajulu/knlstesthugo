@@ -64,7 +64,7 @@ To allow non-technical editors to manage the header and footer menus without tou
 
 The menu template in `layouts/partials/header.html` loops over this data block dynamically:
 ```html
-{{ range hugo.Data.navigation.main_menu }}
+{{ range site.Data.navigation.main_menu }}
   {{ if .dropdown }}
     <li class="nav__item nav__item--dropdown">
       <button>{{ .name }}</button>

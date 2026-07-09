@@ -40,18 +40,21 @@ The CMS configuration file `cloudcannon.config.yml` resides in the project root.
   Specifies where uploaded images should be stored. When editors insert or upload an image in the CMS, CloudCannon saves the file inside `static/assets/images/` and links it as `/assets/images/filename.jpg`.
 - **Collections Config**:
   ```yaml
-  collections_config:
-    pages:
-      name: Website Pages
-      path: content
-      output: true
-      icon: wysiwyg
-      parser: front-matter
-      filter:
-        extensions:
-          - html
+  collection_groups:
+    - heading: Content Management
+      collections:
+        - core_pages
+        - eresources_pages
+        - services_pages
+        - isbn_pages
+        - media_pages
+        - corporate_pages
+        - portal_pages
+    - heading: Menus & Layouts
+      collections:
+        - data
   ```
-  Defines the `Website Pages` collection. The path is set to `content/` and filters files to display only `.html` page content templates. The `wysiwyg` icon is shown in the sidebar.
+  Defines how folders and files are presented in the CMS sidebar interface. By utilizing the `glob` key in `collections_config`, pages are organized into 7 distinct visual folders (Core Pages, Library Services, ISBN Registry, Media Updates, Corporate Strategy, Portal Access, and E-Resources Gateway) directly from the flat `/content/` directory, allowing clean and easy sidebar navigation for content editors.
 
 ---
 

@@ -13,25 +13,125 @@ paths:
   dam_uploads: static/assets/images
   static: static
 
+# Group collections in the sidebar navigation
+collection_groups:
+  - heading: Content Management
+    collections:
+      - core_pages
+      - eresources_pages
+      - services_pages
+      - isbn_pages
+      - media_pages
+      - corporate_pages
+      - portal_pages
+  - heading: Menus & Layouts
+    collections:
+      - data
+
 # Define the collections of files that can be managed in CloudCannon
 collections_config:
-  pages:
-    name: Website Pages
+  core_pages:
+    name: Core Pages
     path: content
     output: true
-    icon: wysiwyg
+    icon: home
     parser: front-matter
-    filter:
-      extensions:
-        - md
-    # Group and order sidebar files
-    sort_options:
-      - key: title
-        order: asc
-        label: Title (A-Z)
-      - key: file_path
-        order: asc
-        label: File Path
+    glob:
+      - "content/_index.md"
+      - "content/who-we-are.md"
+      - "content/services.md"
+      - "content/media-center.md"
+      - "content/contacts.md"
+      - "content/sitemap.md"
+      
+  services_pages:
+    name: Library Services
+    path: content
+    output: true
+    icon: library_books
+    parser: front-matter
+    glob:
+      - "content/braille-library-services.md"
+      - "content/study-and-discussion-rooms.md"
+      - "content/interlibrary-loans.md"
+      - "content/search-our-collections.md"
+      - "content/reference-and-referral-services.md"
+      - "content/outreach-services.md"
+      - "content/promoting-literacy.md"
+      - "content/rare-collections.md"
+      - "content/research-consultancy.md"
+      - "content/training-programs.md"
+      - "content/national-library.md"
+
+  isbn_pages:
+    name: ISBN & Bibliography
+    path: content
+    output: true
+    icon: menu_book
+    parser: front-matter
+    glob:
+      - "content/isbn.md"
+      - "content/isbn-faqs.md"
+      - "content/apply-isbn-online.md"
+      - "content/legal-deposit.md"
+      - "content/kenya-national-bibliography.md"
+
+  media_pages:
+    name: Media & Updates
+    path: content
+    output: true
+    icon: campaign
+    parser: front-matter
+    glob:
+      - "content/events.md"
+      - "content/national-reading-day.md"
+      - "content/go-virtual.md"
+      - "content/tenders.md"
+      - "content/knls-in-the-news.md"
+      - "content/newsletter.md"
+
+  corporate_pages:
+    name: Corporate & Strategy
+    path: content
+    output: true
+    icon: business
+    parser: front-matter
+    glob:
+      - "content/board-of-directors.md"
+      - "content/management-team.md"
+      - "content/strategic-plan.md"
+      - "content/service-charter.md"
+      - "content/careers.md"
+      - "content/partners-sponsors.md"
+      - "content/organizational-structure.md"
+      - "content/recognition-awards.md"
+
+  eresources_pages:
+    name: E-Resources Gateway
+    path: content
+    output: true
+    icon: online_prediction
+    parser: front-matter
+    glob:
+      - "content/e-resources.md"
+      - "content/e-journals.md"
+      - "content/open-e-resources.md"
+      - "content/subscribed-e-resources.md"
+      - "content/e-resources-search-engine.md"
+
+  portal_pages:
+    name: Portal Access
+    path: content
+    output: true
+    icon: login
+    parser: front-matter
+    glob:
+      - "content/ecitizen.md"
+      - "content/report-corruption.md"
+      - "content/staff-login.md"
+      - "content/suppliers-portal.md"
+      - "content/donate.md"
+
   data:
     name: Navigation Menus
     path: data
@@ -97,7 +197,19 @@ inputs:
 editor:
   default_view: visual
   preview_paths:
-    - collection: pages
+    - collection: core_pages
+      path: "{url}"
+    - collection: services_pages
+      path: "{url}"
+    - collection: isbn_pages
+      path: "{url}"
+    - collection: media_pages
+      path: "{url}"
+    - collection: corporate_pages
+      path: "{url}"
+    - collection: eresources_pages
+      path: "{url}"
+    - collection: portal_pages
       path: "{url}"
 
 # Build settings configuration

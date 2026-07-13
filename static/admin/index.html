@@ -22,6 +22,21 @@
       padding: 1.5rem 1rem !important;
     }
 
+    /* 💡 Welcome Note at the top of the Sidebar */
+    aside::before {
+      content: "KNLS EDITING PORTAL\aSelect a section below to update pages. Save your changes as a draft, review, and click 'Publish' to make them live." !important;
+      white-space: pre-wrap !important;
+      display: block !important;
+      font-size: 0.72rem !important;
+      font-weight: 500 !important;
+      color: #94a3b8 !important;
+      line-height: 1.4 !important;
+      border-bottom: 1px solid #1e293b !important;
+      padding-bottom: 1rem !important;
+      margin-bottom: 1rem !important;
+      letter-spacing: 0.02em !important;
+    }
+
     /* Sidebar Navigation Links */
     aside a {
       color: #94a3b8 !important;
@@ -45,14 +60,27 @@
       background-color: #2D2C8E !important; /* KNLS Official Blue */
       color: #ffffff !important;
       font-weight: 600 !important;
-      box-shadow: 0 4px 6px -1px rgba(16, 6, 159, 0.2), 0 2px 4px -1px rgba(16, 6, 159, 0.1) !important;
+      box-shadow: 0 4px 6px -1px rgba(45, 44, 142, 0.2), 0 2px 4px -1px rgba(45, 44, 142, 0.1) !important;
     }
 
-    /* Top App Header bar styling */
+    /* Top App Header bar styling with KNLS Logo */
     header {
       background-color: #ffffff !important;
       border-bottom: 1px solid #e2e8f0 !important;
       box-shadow: none !important;
+      padding-left: 1.5rem !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+    header::before {
+      content: "";
+      display: inline-block !important;
+      width: 110px !important;
+      height: 40px !important;
+      background: url("https://www.knls.ac.ke/wp-content/uploads/2021/09/knlslogo1.png") no-repeat center/contain !important;
+      margin-right: 1.5rem !important;
+      align-self: center !important;
     }
 
     header h1, header span {
@@ -83,7 +111,7 @@
     input:focus, textarea:focus, select:focus {
       border-color: #2D2C8E !important;
       outline: none !important;
-      box-shadow: 0 0 0 3px rgba(16, 6, 159, 0.15) !important;
+      box-shadow: 0 0 0 3px rgba(45, 44, 142, 0.15) !important;
     }
 
     /* Custom Accent Color for Buttons */
@@ -95,16 +123,16 @@
 
     /* Primary Save / Publish Button Styles */
     button[class*="Publish"], button[class*="Save"], button[class*="publish"] {
-      background-color: #ff6b00 !important; /* KNLS Accent Orange */
+      background-color: #F48312 !important; /* KNLS Official Orange */
       color: #ffffff !important;
       font-weight: 600 !important;
       border: none !important;
       padding: 0.625rem 1.25rem !important;
-      box-shadow: 0 4px 6px -1px rgba(255, 107, 0, 0.2) !important;
+      box-shadow: 0 4px 6px -1px rgba(244, 131, 18, 0.2) !important;
     }
 
     button[class*="Publish"]:hover, button[class*="Save"]:hover {
-      background-color: #e05e00 !important;
+      background-color: #d66f0b !important;
     }
 
     /* 🗂️ CloudCannon-style Sidebar Categories Injection */

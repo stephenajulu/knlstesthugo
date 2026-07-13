@@ -54,7 +54,7 @@ Behind the scenes, saving edits triggers the following automatic steps:
 To match the polished, high-fidelity experience of CloudCannon, the Decap CMS admin interface includes several visual custom overrides injected via [static/admin/index.html](file:///C:/Users/ajulu/Desktop/PROJECTS/Dev%20PROJECTS/knlstest.netlify.app/static/admin/index.html):
 
 ### A. Color Palette & Typography
-*   **Deep Sidebar Theme**: The navigation sidebar uses a dark-mode theme (`#0f172a`), contrasting with KNLS official blue (`#10069F`) active indicators.
+*   **Deep Sidebar Theme**: The navigation sidebar uses a dark-mode theme (`#0f172a`), contrasting with KNLS official blue (`#2D2C8E`) active indicators.
 *   **Typography**: Implements Google's **Inter** sans-serif font across the entire editing interface, inputs, and fields.
 *   **Polished Cards & Inputs**: Input fields use light-bordered, rounded styling (`#cbd5e1`) with focused glow highlights. Primary save/publish buttons use the KNLS accent orange (`#ff6b00`).
 

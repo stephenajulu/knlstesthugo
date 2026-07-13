@@ -213,6 +213,78 @@
     CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
     CMS.registerPreviewStyle("/assets/css/styles.css");
 
+    // Custom Alert Box shortcode component
+    CMS.registerEditorComponent({
+      id: "alert",
+      label: "Alert Box",
+      fields: [
+        {
+          name: "type",
+          label: "Alert Type",
+          widget: "select",
+          options: ["info", "success", "warning"],
+          default: "info"
+        },
+        {
+          name: "title",
+          label: "Alert Title (Optional)",
+          widget: "string",
+          required: false
+        },
+        {
+          name: "content",
+          label: "Alert Content",
+          widget: "text"
+        }
+      ],
+      pattern: /^\{\{% alert type="(\S+)"(?: title="([^"]+)")? %\}\}\n?([\s\S]+?)\n?\{\{% \/alert %\}\}/,
+      fromBlock: match => ({
+        type: match[1],
+        title: match[2] || "",
+        content: match[3]
+      }),
+      toBlock: obj => {
+        const titleAttr = obj.title ? ` title="${obj.title}"` : "";
+        return `{{% alert type="${obj.type}"${titleAttr} %}}\n${obj.content}\n{{% /alert %}}`;
+      },
+      toPreview: obj => {
+        const titleHtml = obj.title ? `<strong style="display:block;margin-bottom:0.25rem;">${obj.title}</strong>` : "";
+        const bgColors = { info: "#E8EAF6", success: "#E8F5E9", warning: "#FFF3E0" };
+        const borderColors = { info: "#2D2C8E", success: "#2E7D32", warning: "#E87722" };
+        return `
+          <div style="padding:1rem; border-left:5px solid ${borderColors[obj.type] || "#2D2C8E"}; background:${bgColors[obj.type] || "#E8EAF6"}; border-radius:4px; margin:1rem 0; font-family: sans-serif;">
+            ${titleHtml}
+            <div>${obj.content}</div>
+          </div>
+        `;
+      }
+    });
+
+    // Custom YouTube embed shortcode component
+    CMS.registerEditorComponent({
+      id: "youtube",
+      label: "YouTube Embed",
+      fields: [
+        {
+          name: "id",
+          label: "YouTube Video ID",
+          widget: "string",
+          hint: "e.g. YTKjRukNtvA"
+        }
+      ],
+      pattern: /^\{\{< youtube (\S+) >\}\}/,
+      fromBlock: match => ({
+        id: match[1]
+      }),
+      toBlock: obj => `{{< youtube ${obj.id} >}}`,
+      toPreview: obj => `
+        <div style="background:#f1f5f9; padding:2rem; text-align:center; border: 1px dashed #cbd5e1; border-radius:4px; font-family: sans-serif;">
+          <strong>📺 YouTube Video</strong><br/>
+          <span style="font-size:0.8rem; color:#64748b;">Video ID: ${obj.id}</span>
+        </div>
+      `
+    });
+
     // Wait until the CMS interface is loaded to inject the tour button and setup the guide
     const initTour = () => {
       const checkExist = setInterval(() => {

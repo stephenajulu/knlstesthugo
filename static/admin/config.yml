@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+site_url: https://knlstest.netlify.app
+show_preview_links: true
+
 # Enable multi-stage approval workflow (Draft -> In Review -> Ready -> Publish)
 publish_mode: editorial_workflow
 
@@ -512,7 +515,7 @@ collections:
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
           - {label: "Photo Galleries", name: "galleries", widget: "list", summary: "{{title}} ({{id}})", fields: [
-              {label: "Unique Folder ID (lowercase-no-spaces)", name: "id", widget: "string"},
+              {label: "Unique Folder ID (lowercase-no-spaces)", name: "id", widget: "string", pattern: ["^[a-z0-9-]+$", "Must be lowercase letters, numbers, and dashes only (no spaces or capital letters)"]},
               {label: "Gallery Title", name: "title", widget: "string"},
               {label: "Description", name: "description", widget: "text", required: false},
               {label: "Image Uploads", name: "images", widget: "list", summary: "Image", field: {name: "image", label: "Image", widget: "image"}}
@@ -624,11 +627,12 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "roster"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Roster Members", name: "roster", widget: "list", summary: "{{name}} ({{role}})", fields: [
+          - {label: "Roster Members", name: "roster", widget: "list", summary: "{{name}} ({{title}})", fields: [
               {label: "Full Name", name: "name", widget: "string"},
-              {label: "Role", name: "role", widget: "string"},
-              {label: "Avatar Photo", name: "avatar", widget: "image", required: false},
-              {label: "Biography Summary", name: "bio", widget: "text", required: false}
+              {label: "Title/Position", name: "title", widget: "string"},
+              {label: "Photo Upload", name: "photo", widget: "image", required: false},
+              {label: "Academic/Professional Qualification", name: "qualification", widget: "string", required: false},
+              {label: "Department (Optional)", name: "department", widget: "string", required: false}
             ]}
 
       - file: "content/management-team.md"
@@ -640,11 +644,12 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "roster"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Roster Members", name: "roster", widget: "list", summary: "{{name}} ({{role}})", fields: [
+          - {label: "Roster Members", name: "roster", widget: "list", summary: "{{name}} ({{title}})", fields: [
               {label: "Full Name", name: "name", widget: "string"},
-              {label: "Role", name: "role", widget: "string"},
-              {label: "Avatar Photo", name: "avatar", widget: "image", required: false},
-              {label: "Biography Summary", name: "bio", widget: "text", required: false}
+              {label: "Title/Position", name: "title", widget: "string"},
+              {label: "Photo Upload", name: "photo", widget: "image", required: false},
+              {label: "Academic/Professional Qualification", name: "qualification", widget: "string", required: false},
+              {label: "Department (Optional)", name: "department", widget: "string", required: false}
             ]}
 
       - file: "content/strategic-plan.md"
@@ -715,7 +720,7 @@ collections:
               {label: "Subtitle", name: "subtitle", widget: "text"}
             ]}
           - {label: "Opportunity tabs", name: "tabs", widget: "list", summary: "Tab: {{title}} ({{id}})", fields: [
-              {label: "Anchor ID (vacancies, internships, attachments)", name: "id", widget: "string"},
+              {label: "Anchor ID (vacancies, internships, attachments)", name: "id", widget: "string", pattern: ["^[a-z0-9-]+$", "Must be lowercase letters, numbers, and dashes only (no spaces or capital letters)"]},
               {label: "Tab Name", name: "title", widget: "string"},
               {label: "Section Heading", name: "heading", widget: "string"},
               {label: "Paragraphs", name: "paragraphs", widget: "list", summary: "Paragraph", field: {name: "paragraph", label: "Paragraph text", widget: "text"}},

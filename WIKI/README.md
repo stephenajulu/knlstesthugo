@@ -5,9 +5,10 @@ Welcome to the official documentation for the **Kenya National Library Service (
 ## Table of Contents
 
 1. [Architecture & Hugo Setup](architecture.md)
-2. [CloudCannon CMS Integration](cloudcannon.md)
-3. [SEO, Web Performance & Accessibility](seo_accessibility.md)
-4. [Quality Assurance & Audit Results](audit_results.md)
+2. [Decap CMS Integration](decap_cms.md)
+3. [Editorial Workflow & Concurrent Writing](editorial_workflow.md)
+4. [SEO, Web Performance & Accessibility](seo_accessibility.md)
+5. [Quality Assurance & Audit Results](audit_results.md)
 
 ---
 
@@ -60,7 +61,8 @@ knlstest.netlify.app/
 └── WIKI/                  # Project documentation folder
     ├── README.md          # Main landing page (this file)
     ├── architecture.md    # Code structure and templates details
-    ├── cloudcannon.md     # CMS fields and settings guides
+    ├── decap_cms.md       # Decap CMS configurations and fields guides
+    ├── editorial_workflow.md # Guidelines for concurrent editors & PR staging
     ├── seo_accessibility.md # Accessibility and SEO highlights
     └── audit_results.md   # Quality assurance and audit findings
 ```

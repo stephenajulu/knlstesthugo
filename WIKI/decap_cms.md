@@ -46,3 +46,22 @@ Behind the scenes, saving edits triggers the following automatic steps:
 1.  **Git Commit**: Decap CMS communicates with Netlify Git Gateway to commit the updated Markdown/YAML files directly to the GitHub repository on behalf of the editor.
 2.  **Netlify Compilation**: Netlify detects the new commit, runs `hugo --gc --minify`, and rebuilds the static files.
 3.  **Live Updates**: The website updates automatically in about **1 to 2 minutes** after clicking "Save" in the CMS.
+
+---
+
+## 🎨 4. Premium Visual Customizations (CloudCannon Style)
+
+To match the polished, high-fidelity experience of CloudCannon, the Decap CMS admin interface includes several visual custom overrides injected via [static/admin/index.html](file:///C:/Users/ajulu/Desktop/PROJECTS/Dev%20PROJECTS/knlstest.netlify.app/static/admin/index.html):
+
+### A. Color Palette & Typography
+*   **Deep Sidebar Theme**: The navigation sidebar uses a dark-mode theme (`#0f172a`), contrasting with KNLS official blue (`#10069F`) active indicators.
+*   **Typography**: Implements Google's **Inter** sans-serif font across the entire editing interface, inputs, and fields.
+*   **Polished Cards & Inputs**: Input fields use light-bordered, rounded styling (`#cbd5e1`) with focused glow highlights. Primary save/publish buttons use the KNLS accent orange (`#ff6b00`).
+
+### B. CloudCannon-style Collection Headings
+Since Decap CMS renders collections as a flat list by default, custom CSS pseudo-element rules target child index elements of the sidebar:
+*   `aside ul li:nth-child(1)::before`: Injects a **CONTENT MANAGEMENT** category heading above the Core Pages collection.
+*   `aside ul li:nth-child(8)::before`: Injects a **SETTINGS & MENUS** category heading above the Menus & Layouts collection.
+
+This visually splits the admin sidebar into organized, recognizable groups exactly like CloudCannon's collections configuration.
+

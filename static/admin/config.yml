@@ -293,6 +293,70 @@ collections:
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
+      - file: "content/american-corner-programs.md"
+        label: "American Corner Programs"
+        name: "american_corner"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/capacity-building.md"
+        label: "Capacity Building"
+        name: "capacity_building"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/data-center.md"
+        label: "Data Center Services"
+        name: "data_center"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/digitization.md"
+        label: "Digitization Services"
+        name: "digitization"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
   - name: "isbn_pages"
     label: "ISBN & Bibliography"
     delete: false
@@ -477,6 +541,19 @@ collections:
               {label: "Text", name: "text", widget: "text", required: false},
               {label: "PDF File Upload", name: "file_url", widget: "file"}
             ]}
+
+      - file: "content/historical-documents.md"
+        label: "Historical Documents"
+        name: "historical_documents"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
 
   - name: "corporate_pages"
     label: "Corporate & Strategy"

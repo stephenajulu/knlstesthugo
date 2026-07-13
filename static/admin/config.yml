@@ -1,0 +1,949 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "core_pages"
+    label: "Core Pages"
+    delete: false
+    create: false
+    files:
+      - file: "content/_index.md"
+        label: "Homepage"
+        name: "homepage"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Body Class", name: "body_class", widget: "hidden", default: "home-page"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "Background Image", name: "image", widget: "image"},
+              {label: "Primary Button Text", name: "primary_btn_text", widget: "string"},
+              {label: "Primary Button Link", name: "primary_btn_link", widget: "string"},
+              {label: "Secondary Button Text", name: "secondary_btn_text", widget: "string"},
+              {label: "Secondary Button Link", name: "secondary_btn_link", widget: "string"}
+            ]}
+          - {label: "Highlights Grid", name: "highlights", widget: "list", fields: [
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Icon name (e.g. book, mail, user)", name: "icon", widget: "string"},
+              {label: "Description", name: "text", widget: "text"},
+              {label: "Target Link URL", name: "url", widget: "string"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/who-we-are.md"
+        label: "Who We Are"
+        name: "who_we_are"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "about"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "About Hero Grid", name: "about_hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Highlight Text", name: "highlight_text", widget: "text"},
+              {label: "Paragraph 1", name: "text_1", widget: "text"},
+              {label: "Paragraph 2", name: "text_2", widget: "text"},
+              {label: "Main Image", name: "image", widget: "image"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/services.md"
+        label: "Our Services Directory"
+        name: "services_dir"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "services"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Service Groups", name: "groups", widget: "list", fields: [
+              {label: "Number (e.g. 01)", name: "number", widget: "string"},
+              {label: "Group Title", name: "title", widget: "string"},
+              {label: "Links", name: "links", widget: "list", fields: [
+                {label: "Name", name: "name", widget: "string"},
+                {label: "URL Path", name: "url", widget: "string"}
+              ]}
+            ]}
+
+      - file: "content/media-center.md"
+        label: "Media Center Hub"
+        name: "media_center"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "media_center"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Directory Navigation Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon (e.g. mail, film, book, clipboard)", name: "icon", widget: "string"},
+              {label: "Description Text", name: "text", widget: "text"},
+              {label: "Destination Link", name: "url", widget: "string"}
+            ]}
+
+      - file: "content/contacts.md"
+        label: "Contacts & FAQs"
+        name: "contacts"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "contacts"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/sitemap.md"
+        label: "Sitemap Index"
+        name: "sitemap"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "sitemap"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+
+  - name: "services_pages"
+    label: "Library Services"
+    delete: false
+    create: false
+    files:
+      - file: "content/braille-library-services.md"
+        label: "Braille Library Services"
+        name: "braille"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon (e.g. eye, book-open)", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+      
+      - file: "content/study-and-discussion-rooms.md"
+        label: "Study & Discussion Rooms"
+        name: "study_rooms"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/interlibrary-loans.md"
+        label: "Interlibrary Loans"
+        name: "interlibrary"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/search-our-collections.md"
+        label: "Search Our Collections"
+        name: "search_collections"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/reference-and-referral-services.md"
+        label: "Reference & Referral Services"
+        name: "reference"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/outreach-services.md"
+        label: "Outreach Services"
+        name: "outreach"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/promoting-literacy.md"
+        label: "Promoting Literacy"
+        name: "promoting_literacy"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/rare-collections.md"
+        label: "Rare Collections"
+        name: "rare_collections"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/research-consultancy.md"
+        label: "Research & Consultancy"
+        name: "research"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/training-programs.md"
+        label: "Training Programs"
+        name: "training"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/national-library.md"
+        label: "National Library Services"
+        name: "national_library"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+              {label: "Card Title", name: "title", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+  - name: "isbn_pages"
+    label: "ISBN & Bibliography"
+    delete: false
+    create: false
+    files:
+      - file: "content/isbn.md"
+        label: "Issuance of ISBN"
+        name: "isbn"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/isbn-faqs.md"
+        label: "ISBN FAQs"
+        name: "isbn_faqs"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "faq"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/apply-isbn-online.md"
+        label: "Apply ISBN Online Portal"
+        name: "apply_isbn"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/legal-deposit.md"
+        label: "Legal Deposit"
+        name: "legal_deposit"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/kenya-national-bibliography.md"
+        label: "Kenya National Bibliography (KNB)"
+        name: "bibliography"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "bibliography"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Service Overview", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Description Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Archive Details", name: "archive", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Available Filter Years", name: "years", widget: "list", field: {label: "Year", widget: "string"}}
+          - {label: "Bibliography PDF Files", name: "items", widget: "list", fields: [
+              {label: "Document Title", name: "title", widget: "string"},
+              {label: "PDF File Upload", name: "file_url", widget: "file"},
+              {label: "Year", name: "year", widget: "string"},
+              {label: "Decade (e.g. 2010s)", name: "decade", widget: "string"},
+              {label: "Document Type", name: "type", widget: "select", options: ["final", "preliminary"]}
+            ]}
+
+  - name: "media_pages"
+    label: "Media & Updates"
+    delete: false
+    create: false
+    files:
+      - file: "content/events.md"
+        label: "Events Gallery"
+        name: "events"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "events"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Photo Galleries", name: "galleries", widget: "list", fields: [
+              {label: "Unique Folder ID (lowercase-no-spaces)", name: "id", widget: "string"},
+              {label: "Gallery Title", name: "title", widget: "string"},
+              {label: "Description", name: "description", widget: "text"},
+              {label: "Image Uploads", name: "images", widget: "list", field: {label: "Image", widget: "image"}}
+            ]}
+
+      - file: "content/national-reading-day.md"
+        label: "National Reading Day (Timed Page)"
+        name: "reading_day"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Timed Redirection Key", name: "data_timed_page", widget: "hidden", default: "national-reading-day"}
+          - {label: "Event Expiry Date & Time", name: "data_expiry_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZZ"}
+          - {label: "Redirect Path after Expiry", name: "data_expired_redirect", widget: "string", default: "/events/#events-gallery"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/go-virtual.md"
+        label: "Go Virtual Portal"
+        name: "go_virtual"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "single"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/tenders.md"
+        label: "Tenders & Procurement"
+        name: "tenders"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "tenders"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+
+      - file: "content/knls-in-the-news.md"
+        label: "KNLS in the News"
+        name: "news"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "dynamic_list"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Featured News Items", name: "items", widget: "list", fields: [
+              {label: "Headline Title", name: "title", widget: "string"},
+              {label: "Summary Paragraph", name: "summary", widget: "text"},
+              {label: "Media Source (e.g., Daily Nation, The Star)", name: "publish_date", widget: "string"},
+              {label: "Thumbnail Image", name: "image_url", widget: "image"},
+              {label: "Original Story URL", name: "link_url", widget: "string"}
+            ]}
+
+      - file: "content/newsletter.md"
+        label: "Newsletters"
+        name: "newsletter"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "newsletter"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Featured Lead Bulletin", name: "lead_bulletin", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Summary Text", name: "text", widget: "text"},
+              {label: "PDF File Upload", name: "file_url", widget: "file"}
+            ]}
+          - {label: "Archived Bulletins", name: "bulletins", widget: "list", fields: [
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Text", name: "text", widget: "text"},
+              {label: "PDF File Upload", name: "file_url", widget: "file"}
+            ]}
+
+  - name: "corporate_pages"
+    label: "Corporate & Strategy"
+    delete: false
+    create: false
+    files:
+      - file: "content/board-of-directors.md"
+        label: "Board of Directors"
+        name: "board"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "roster"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Roster Members", name: "roster", widget: "list", fields: [
+              {label: "Full Name", name: "name", widget: "string"},
+              {label: "Role", name: "role", widget: "string"},
+              {label: "Avatar Photo", name: "avatar", widget: "image"},
+              {label: "Biography Summary", name: "bio", widget: "text"}
+            ]}
+
+      - file: "content/management-team.md"
+        label: "Management Team"
+        name: "management"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "roster"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Roster Members", name: "roster", widget: "list", fields: [
+              {label: "Full Name", name: "name", widget: "string"},
+              {label: "Role", name: "role", widget: "string"},
+              {label: "Avatar Photo", name: "avatar", widget: "image"},
+              {label: "Biography Summary", name: "bio", widget: "text"}
+            ]}
+
+      - file: "content/strategic-plan.md"
+        label: "Strategic Plan"
+        name: "strategic_plan"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "document_list"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Strategic Documents", name: "documents", widget: "list", fields: [
+              {label: "Document Title", name: "title", widget: "string"},
+              {label: "Short Description", name: "text", widget: "text"},
+              {label: "Category Label", name: "meta", widget: "string"},
+              {label: "Cover Thumbnail Image", name: "cover", widget: "image"},
+              {label: "PDF File Upload", name: "url", widget: "file"}
+            ]}
+
+      - file: "content/service-charter.md"
+        label: "Service Charter"
+        name: "service_charter"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "service_charter"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Customer Commitment Details", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Headline", name: "title", widget: "string"},
+              {label: "Description Paragraph", name: "text", widget: "text"}
+            ]}
+          - {label: "Citizen Charter Downloads", name: "downloads", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "Download files", name: "items", widget: "list", fields: [
+                {label: "File Title", name: "title", widget: "string"},
+                {label: "Description Text", name: "text", widget: "text"},
+                {label: "Label", name: "meta", widget: "string"},
+                {label: "PDF File Upload", name: "url", widget: "file"}
+              ]}
+            ]}
+          - {label: "Multimedia Embeds", name: "videos", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "YouTube items", name: "items", widget: "list", fields: [
+                {label: "Title Label", name: "title", widget: "string"},
+                {label: "YouTube Video ID (11 chars)", name: "embed_id", widget: "string"},
+                {label: "Full Watch URL", name: "youtube_url", widget: "string"}
+              ]}
+            ]}
+
+      - file: "content/careers.md"
+        label: "Careers & Internships"
+        name: "careers"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "careers"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Careers Intro Heading", name: "careers_section", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Opportunity tabs", name: "tabs", widget: "list", fields: [
+              {label: "Anchor ID (vacancies, internships, attachments)", name: "id", widget: "string"},
+              {label: "Tab Name", name: "title", widget: "string"},
+              {label: "Section Heading", name: "heading", widget: "string"},
+              {label: "Paragraphs", name: "paragraphs", widget: "list", field: {label: "Paragraph text", widget: "text"}},
+              {label: "List 1 Title", name: "bullets_title", widget: "string"},
+              {label: "List 1 Items", name: "bullets", widget: "list", field: {label: "Item", widget: "string"}},
+              {label: "List 2 Title", name: "bullets_title_2", widget: "string"},
+              {label: "List 2 Items", name: "bullets_2", widget: "list", field: {label: "Item", widget: "string"}},
+              {label: "List 3 Title", name: "bullets_title_3", widget: "string"},
+              {label: "List 3 Items", name: "bullets_3", widget: "list", field: {label: "Item", widget: "string"}},
+              {label: "Tab Note footer", name: "note", widget: "text"},
+              {label: "Button Text Label", name: "button_text", widget: "string"},
+              {label: "Button Link URL", name: "button_url", widget: "string"}
+            ]}
+
+      - file: "content/partners-sponsors.md"
+        label: "Partners & Sponsors"
+        name: "partners"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "partners"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Partner logos (Marquee)", name: "partner_logos", widget: "list", fields: [
+              {label: "Partner Name", name: "name", widget: "string"},
+              {label: "Logo Image", name: "logo", widget: "image"},
+              {label: "Website URL", name: "url", widget: "string"}
+            ]}
+          - {label: "Collaborations Info", name: "collaborators", widget: "object", fields: [
+              {label: "Section Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "Items", name: "items", widget: "list", fields: [
+                {label: "Partner Name", name: "title", widget: "string"},
+                {label: "Activity Description", name: "text", widget: "text"}
+              ]}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/organizational-structure.md"
+        label: "Organizational Structure"
+        name: "org_structure"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "organizational_structure"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Org Chart structure", name: "chart", widget: "object", fields: [
+              {label: "Board Level Card Title", name: "board", widget: "string"},
+              {label: "Committee Level Card Title", name: "audit_committee", widget: "string"},
+              {label: "Executive Level Card Title (e.g. Director General)", name: "executive", widget: "string"},
+              {label: "Standalone Departments", name: "standalone_departments", widget: "list", field: {label: "Department", widget: "string"}},
+              {label: "Directorates", name: "directorates", widget: "list", fields: [
+                {label: "Directorate Name", name: "name", widget: "string"},
+                {label: "Child Departments", name: "departments", widget: "list", field: {label: "Department", widget: "string"}}
+              ]}
+            ]}
+
+      - file: "content/recognition-awards.md"
+        label: "Recognition & Awards"
+        name: "awards"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "recognition_awards"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Service Excellence Details", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Heading", name: "title", widget: "string"},
+              {label: "Text Description", name: "text", widget: "text"}
+            ]}
+          - {label: "Metrics list", name: "stats", widget: "list", fields: [
+              {label: "Value / Year Range", name: "metric", widget: "string"},
+              {label: "Label", name: "label", widget: "string"}
+            ]}
+          - {label: "Section Spotlights", name: "spotlights", widget: "list", fields: [
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Kicker Label", name: "kicker", widget: "string"},
+              {label: "Icon name", name: "icon", widget: "string"},
+              {label: "Description", name: "text", widget: "text"}
+            ]}
+          - {label: "National Maktaba Awards", name: "national_awards", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Section Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "Awards items", name: "items", widget: "list", fields: [
+                {label: "Year", name: "year", widget: "string"},
+                {label: "List of recognitions (HTML ok)", name: "list", widget: "list", field: {label: "Recognition item", widget: "string"}}
+              ]}
+            ]}
+          - {label: "International Recognition", name: "international_awards", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Section Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "Awards items", name: "items", widget: "list", fields: [
+                {label: "Year", name: "year", widget: "string"},
+                {label: "Title", name: "title", widget: "string"},
+                {label: "Metadata type label", name: "meta", widget: "string"},
+                {label: "Highlight Card (True/False)", name: "major", widget: "boolean"},
+                {label: "Body Text (HTML ok)", name: "text", widget: "text"},
+                {label: "List of awards (Optional)", name: "list", widget: "list", field: {label: "Award item", widget: "string"}}
+              ]}
+            ]}
+          - {label: "Why this matters", name: "context", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Further reading", name: "further_reading", widget: "object", fields: [
+              {label: "Section Title", name: "title", widget: "string"},
+              {label: "Reference links", name: "links", widget: "list", fields: [
+                {label: "Link Label", name: "label", widget: "string"},
+                {label: "URL Target", name: "url", widget: "string"}
+              ]}
+            ]}
+
+  - name: "eresources_pages"
+    label: "E-Resources Gateway"
+    delete: false
+    create: false
+    files:
+      - file: "content/e-resources.md"
+        label: "E-Resources Hub"
+        name: "e_resources"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "e_resources"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Digital gateway Details", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Description Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Quick provider logo links", name: "provider_strip", widget: "object", fields: [
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"},
+              {label: "Providers", name: "providers", widget: "list", fields: [
+                {label: "Provider Name", name: "name", widget: "string"},
+                {label: "Logo Image URL", name: "logo", widget: "string"},
+                {label: "Website URL", name: "url", widget: "string"}
+              ]}
+            ]}
+          - {label: "Gateway category links", name: "categories", widget: "list", fields: [
+              {label: "Category Title", name: "title", widget: "string"},
+              {label: "Icon (e.g. book-open, zap, lock, search)", name: "icon", widget: "string"},
+              {label: "Description", name: "text", widget: "text"},
+              {label: "Button label", name: "button_text", widget: "string"},
+              {label: "Relative URL Path", name: "url", widget: "string"}
+            ]}
+
+      - file: "content/e-journals.md"
+        label: "E-Journals Directory"
+        name: "e_journals"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "e_resource_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Overview", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+              {label: "Category Name", name: "name", widget: "string"},
+              {label: "Databases list", name: "items", widget: "list", fields: [
+                {label: "Database Title", name: "title", widget: "string"},
+                {label: "Direct Link URL", name: "url", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Summary Paragraph", name: "summary", widget: "text"},
+                {label: "Access details (e.g. IP Access, Login)", name: "note", widget: "string"},
+                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string"}
+              ]}
+            ]}
+
+      - file: "content/open-e-resources.md"
+        label: "Open E-Resources"
+        name: "open_e_resources"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "e_resource_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Overview", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+              {label: "Category Name", name: "name", widget: "string"},
+              {label: "Databases list", name: "items", widget: "list", fields: [
+                {label: "Database Title", name: "title", widget: "string"},
+                {label: "Direct Link URL", name: "url", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Summary Paragraph", name: "summary", widget: "text"},
+                {label: "Access details (e.g. Open Access)", name: "note", widget: "string"},
+                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string"}
+              ]}
+            ]}
+
+      - file: "content/subscribed-e-resources.md"
+        label: "Subscribed E-Resources"
+        name: "subscribed_e_resources"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "e_resource_detail"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Overview", name: "overview", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Text", name: "text", widget: "text"}
+            ]}
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+              {label: "Category Name", name: "name", widget: "string"},
+              {label: "Databases list", name: "items", widget: "list", fields: [
+                {label: "Database Title", name: "title", widget: "string"},
+                {label: "Direct Link URL", name: "url", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Summary Paragraph", name: "summary", widget: "text"},
+                {label: "Access details (e.g. Subscribed)", name: "note", widget: "string"},
+                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string"}
+              ]}
+            ]}
+
+      - file: "content/e-resources-search-engine.md"
+        label: "E-Resources Search Engine"
+        name: "e_resources_search"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Layout", name: "layout", widget: "hidden", default: "e_resources_search"}
+          - {label: "Kicker", name: "kicker", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Search Panel", name: "search_panel", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Description", name: "text", widget: "text"},
+              {label: "Google CSE CX Key", name: "cx", widget: "string"},
+              {label: "Fallback Search URL", name: "cse_url", widget: "string"},
+              {label: "Fallback Button Label", name: "button_label", widget: "string"},
+              {label: "Search Tips List", name: "tips", widget: "list", field: {label: "Tip", widget: "string"}}
+            ]}
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+              {label: "Category Name", name: "name", widget: "string"},
+              {label: "Databases list", name: "items", widget: "list", fields: [
+                {label: "Database Title", name: "title", widget: "string"},
+                {label: "Direct Link URL", name: "url", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Summary Paragraph", name: "summary", widget: "text"},
+                {label: "Access details", name: "note", widget: "string"},
+                {label: "Search tags", name: "tags", widget: "string"}
+              ]}
+            ]}
+
+  - name: "portal_pages"
+    label: "Portal Access"
+    delete: false
+    create: false
+    files:
+      - file: "content/ecitizen.md"
+        label: "eCitizen Access"
+        name: "ecitizen"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/report-corruption.md"
+        label: "Report Corruption Portal"
+        name: "report_corruption"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/staff-login.md"
+        label: "Staff Login Portal"
+        name: "staff_login"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/suppliers-portal.md"
+        label: "Suppliers Portal"
+        name: "suppliers_portal"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+      - file: "content/donate.md"
+        label: "Donate / Support Portal"
+        name: "donate"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Details", name: "hero", widget: "object", fields: [
+              {label: "Kicker", name: "kicker", widget: "string"},
+              {label: "Title", name: "title", widget: "string"},
+              {label: "Subtitle", name: "subtitle", widget: "text"}
+            ]}
+          - {label: "Body Content", name: "body", widget: "markdown"}
+
+  - name: "settings"
+    label: "Menus & Layouts"
+    delete: false
+    create: false
+    files:
+      - file: "data/navigation.yml"
+        label: "Navigation Menus"
+        name: "navigation"
+        fields:
+          - {label: "Header Top Ribbon Contact Info", name: "contact_strip", widget: "object", fields: [
+              {label: "Phone Text (e.g. +254...)", name: "phone", widget: "string"},
+              {label: "Email Address (e.g. info...)", name: "email", widget: "string"},
+              {label: "Ecitizen Label Text", name: "ecitizen_label", widget: "string"},
+              {label: "Ecitizen Target Link", name: "ecitizen_url", widget: "string"},
+              {label: "Staff Portal Label Text", name: "staff_label", widget: "string"},
+              {label: "Staff Portal Target Link", name: "staff_url", widget: "string"},
+              {label: "Suppliers Portal Label Text", name: "suppliers_label", widget: "string"},
+              {label: "Suppliers Portal Target Link", name: "suppliers_url", widget: "string"}
+            ]}
+          - {label: "Header Main Menu Options", name: "main_menu", widget: "list", fields: [
+              {label: "Category Name (e.g. Services, About)", name: "name", widget: "string"},
+              {label: "Direct Link URL (if no dropdown)", name: "url", widget: "string"},
+              {label: "Dropdown Submenus List (Optional)", name: "dropdown", widget: "list", fields: [
+                {label: "Link Name", name: "name", widget: "string"},
+                {label: "Link Target URL", name: "url", widget: "string"},
+                {label: "Timed Expiration Date (Optional)", name: "expiry", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZZ"}
+              ]}
+            ]}
+          - {label: "Footer Navigation Links Columns", name: "footer_columns", widget: "list", fields: [
+              {label: "Column Title", name: "title", widget: "string"},
+              {label: "Links list", name: "links", widget: "list", fields: [
+                {label: "Link Name", name: "name", widget: "string"},
+                {label: "Link Target URL", name: "url", widget: "string"}
+              ]}
+            ]}

@@ -37,12 +37,12 @@ collections_config:
     icon: home
     parser: front-matter
     glob:
-      - "content/_index.md"
-      - "content/who-we-are.md"
-      - "content/services.md"
-      - "content/media-center.md"
-      - "content/contacts.md"
-      - "content/sitemap.md"
+      - "_index.md"
+      - "who-we-are.md"
+      - "services.md"
+      - "media-center.md"
+      - "contacts.md"
+      - "sitemap.md"
       
   services_pages:
     name: Library Services
@@ -51,17 +51,17 @@ collections_config:
     icon: library_books
     parser: front-matter
     glob:
-      - "content/braille-library-services.md"
-      - "content/study-and-discussion-rooms.md"
-      - "content/interlibrary-loans.md"
-      - "content/search-our-collections.md"
-      - "content/reference-and-referral-services.md"
-      - "content/outreach-services.md"
-      - "content/promoting-literacy.md"
-      - "content/rare-collections.md"
-      - "content/research-consultancy.md"
-      - "content/training-programs.md"
-      - "content/national-library.md"
+      - "braille-library-services.md"
+      - "study-and-discussion-rooms.md"
+      - "interlibrary-loans.md"
+      - "search-our-collections.md"
+      - "reference-and-referral-services.md"
+      - "outreach-services.md"
+      - "promoting-literacy.md"
+      - "rare-collections.md"
+      - "research-consultancy.md"
+      - "training-programs.md"
+      - "national-library.md"
 
   isbn_pages:
     name: ISBN & Bibliography
@@ -70,11 +70,11 @@ collections_config:
     icon: menu_book
     parser: front-matter
     glob:
-      - "content/isbn.md"
-      - "content/isbn-faqs.md"
-      - "content/apply-isbn-online.md"
-      - "content/legal-deposit.md"
-      - "content/kenya-national-bibliography.md"
+      - "isbn.md"
+      - "isbn-faqs.md"
+      - "apply-isbn-online.md"
+      - "legal-deposit.md"
+      - "kenya-national-bibliography.md"
 
   media_pages:
     name: Media & Updates
@@ -83,12 +83,12 @@ collections_config:
     icon: campaign
     parser: front-matter
     glob:
-      - "content/events.md"
-      - "content/national-reading-day.md"
-      - "content/go-virtual.md"
-      - "content/tenders.md"
-      - "content/knls-in-the-news.md"
-      - "content/newsletter.md"
+      - "events.md"
+      - "national-reading-day.md"
+      - "go-virtual.md"
+      - "tenders.md"
+      - "knls-in-the-news.md"
+      - "newsletter.md"
 
   corporate_pages:
     name: Corporate & Strategy
@@ -97,14 +97,14 @@ collections_config:
     icon: business
     parser: front-matter
     glob:
-      - "content/board-of-directors.md"
-      - "content/management-team.md"
-      - "content/strategic-plan.md"
-      - "content/service-charter.md"
-      - "content/careers.md"
-      - "content/partners-sponsors.md"
-      - "content/organizational-structure.md"
-      - "content/recognition-awards.md"
+      - "board-of-directors.md"
+      - "management-team.md"
+      - "strategic-plan.md"
+      - "service-charter.md"
+      - "careers.md"
+      - "partners-sponsors.md"
+      - "organizational-structure.md"
+      - "recognition-awards.md"
 
   eresources_pages:
     name: E-Resources Gateway
@@ -113,11 +113,11 @@ collections_config:
     icon: online_prediction
     parser: front-matter
     glob:
-      - "content/e-resources.md"
-      - "content/e-journals.md"
-      - "content/open-e-resources.md"
-      - "content/subscribed-e-resources.md"
-      - "content/e-resources-search-engine.md"
+      - "e-resources.md"
+      - "e-journals.md"
+      - "open-e-resources.md"
+      - "subscribed-e-resources.md"
+      - "e-resources-search-engine.md"
 
   portal_pages:
     name: Portal Access
@@ -126,11 +126,11 @@ collections_config:
     icon: login
     parser: front-matter
     glob:
-      - "content/ecitizen.md"
-      - "content/report-corruption.md"
-      - "content/staff-login.md"
-      - "content/suppliers-portal.md"
-      - "content/donate.md"
+      - "ecitizen.md"
+      - "report-corruption.md"
+      - "staff-login.md"
+      - "suppliers-portal.md"
+      - "donate.md"
 
   data:
     name: Navigation Menus

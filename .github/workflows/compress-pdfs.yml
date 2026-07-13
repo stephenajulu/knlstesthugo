@@ -1,0 +1,60 @@
+name: Compress Uploaded PDFs
+
+on:
+  push:
+    paths:
+      - '**/*.pdf'
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  compress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Compress PDFs
+        run: |
+          # Get list of added/modified PDFs in the last commit
+          PDF_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.pdf$' || true)
+          
+          if [ -z "$PDF_FILES" ]; then
+            echo "No PDF files modified in the latest commit."
+            exit 0
+          fi
+          
+          echo "Found PDFs to compress:"
+          echo "$PDF_FILES"
+          
+          for file in $PDF_FILES; do
+            if [ -f "$file" ]; then
+              echo "Compressing $file..."
+              temp_file="${file}.tmp"
+              
+              # Run Ghostscript compression with ebook settings (150 dpi - high quality web format)
+              gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$temp_file" "$file"
+              
+              orig_size=$(wc -c < "$file")
+              temp_size=$(wc -c < "$temp_file")
+              
+              if [ "$temp_size" -lt "$orig_size" ]; then
+                mv "$temp_file" "$file"
+                echo "Successfully compressed $file from $orig_size to $temp_size bytes."
+              else
+                rm "$temp_file"
+                echo "Compressed file was not smaller. Keeping original for $file."
+              fi
+            fi
+          done
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Optimize uploaded PDFs using Ghostscript [skip ci]"
+          file_pattern: "**/*.pdf"

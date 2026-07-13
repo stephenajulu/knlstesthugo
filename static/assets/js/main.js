@@ -165,6 +165,20 @@ function setupMobileNavigation() {
   // Disabled: mobile navigation is handled by setupMobileNavigationCompatibility below.
 }
 
+let pagefindInstance = null;
+
+async function getPagefind() {
+  if (!pagefindInstance) {
+    try {
+      pagefindInstance = await import("/pagefind/pagefind.js");
+      await pagefindInstance.init();
+    } catch (e) {
+      console.warn("Pagefind index not loaded yet (fallback search active).");
+    }
+  }
+  return pagefindInstance;
+}
+
 function setupSearch() {
   const open = document.getElementById("openSearch");
   const close = document.getElementById("closeSearch");
@@ -174,27 +188,56 @@ function setupSearch() {
 
   if (!open || !close || !dialog || !input || !results) return;
 
-  function renderResults(query = "") {
-    const q = query.trim().toLowerCase();
+  // Pre-load Pagefind assets when search button is hovered or focused
+  open.addEventListener("mouseenter", getPagefind);
+  open.addEventListener("focus", getPagefind);
 
-    const matches = SITE_PAGES.filter((page) => {
-      if (isKNLSEventExpired(page.expiryDate)) return false;
-      const text = `${page.title} ${page.group} ${page.summary}`.toLowerCase();
-      return !q || text.includes(q);
-    }).slice(0, 12);
+  let searchTimeout = null;
 
-    results.innerHTML = matches.map((page) => `
-      <a class="search-result" href="${page.url}" role="listitem">
-        <strong>${page.title}</strong><br>
-        <span>${page.group} — ${page.summary}</span>
-      </a>
-    `).join("");
+  async function renderResults(query = "") {
+    const q = query.trim();
+    if (!q) {
+      results.innerHTML = "";
+      return;
+    }
+
+    const pf = await getPagefind();
+    if (!pf) {
+      // Fallback search using local array (useful during local dev)
+      const matches = (window.SITE_PAGES || []).filter((page) => {
+        const text = `${page.title} ${page.group} ${page.summary}`.toLowerCase();
+        return text.includes(q.toLowerCase());
+      }).slice(0, 12);
+
+      results.innerHTML = matches.map((page) => `
+        <a class="search-result" href="${page.url}" role="listitem">
+          <strong>${page.title}</strong><br>
+          <span>${page.group} — ${page.summary}</span>
+        </a>
+      `).join("");
+      return;
+    }
+
+    try {
+      const search = await pf.search(q);
+      const matches = await Promise.all(search.results.slice(0, 12).map(r => r.data()));
+      
+      results.innerHTML = matches.map((match) => `
+        <a class="search-result" href="${match.url}" role="listitem">
+          <strong>${match.meta.title || "Untitled"}</strong><br>
+          <span>${match.meta.kicker || "Page"} — ${match.excerpt}</span>
+        </a>
+      `).join("");
+    } catch (e) {
+      console.error("Pagefind search query error:", e);
+    }
   }
 
   open.addEventListener("click", () => {
     dialog.hidden = false;
     input.value = "";
-    renderResults();
+    results.innerHTML = "";
+    getPagefind();
     setTimeout(() => input.focus(), 0);
   });
 
@@ -210,7 +253,12 @@ function setupSearch() {
     if (event.key === "Escape" && !dialog.hidden) dialog.hidden = true;
   });
 
-  input.addEventListener("input", () => renderResults(input.value));
+  input.addEventListener("input", () => {
+    if (searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      renderResults(input.value);
+    }, 150);
+  });
 }
 
 
@@ -445,13 +493,18 @@ function setupContactForm() {
     if (valid) {
       message.textContent = "Sending your message...";
       try {
-        const response = await fetch("api/contact-submit.php", {
+        const formData = new FormData(form);
+        const response = await fetch("/", {
           method: "POST",
-          body: new FormData(form)
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString()
         });
-        const result = await response.json();
-        message.textContent = result.message || "Thank you. Your message has been submitted.";
-        if (result.ok) form.reset();
+        if (response.ok) {
+          message.textContent = "Thank you. Your message has been submitted successfully.";
+          form.reset();
+        } else {
+          throw new Error("Netlify form submission failed");
+        }
       } catch (error) {
         message.textContent = "We could not send the message. Please try again later or email KNLS directly.";
       }

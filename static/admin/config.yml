@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+# Enable multi-stage approval workflow (Draft -> In Review -> Ready -> Publish)
+publish_mode: editorial_workflow
+
 media_folder: "static/assets/images"
 public_folder: "/assets/images"
 
@@ -20,18 +23,18 @@ collections:
           - {label: "Body Class", name: "body_class", widget: "hidden", default: "home-page"}
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "Background Image", name: "image", widget: "image"},
-              {label: "Primary Button Text", name: "primary_btn_text", widget: "string"},
-              {label: "Primary Button Link", name: "primary_btn_link", widget: "string"},
-              {label: "Secondary Button Text", name: "secondary_btn_text", widget: "string"},
-              {label: "Secondary Button Link", name: "secondary_btn_link", widget: "string"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false},
+              {label: "Background Image", name: "image", widget: "image", required: false},
+              {label: "Primary Button Text", name: "primary_btn_text", widget: "string", required: false},
+              {label: "Primary Button Link", name: "primary_btn_link", widget: "string", required: false},
+              {label: "Secondary Button Text", name: "secondary_btn_text", widget: "string", required: false},
+              {label: "Secondary Button Link", name: "secondary_btn_link", widget: "string", required: false}
             ]}
-          - {label: "Highlights Grid", name: "highlights", widget: "list", fields: [
+          - {label: "Highlights Grid", name: "highlights", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Title", name: "title", widget: "string"},
-              {label: "Icon name (e.g. book, mail, user)", name: "icon", widget: "string"},
+              {label: "Icon name (e.g. book, mail, user)", name: "icon", widget: "string", required: false},
               {label: "Description", name: "text", widget: "text"},
-              {label: "Target Link URL", name: "url", widget: "string"}
+              {label: "Target Link URL", name: "url", widget: "string", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -49,8 +52,8 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Highlight Text", name: "highlight_text", widget: "text"},
               {label: "Paragraph 1", name: "text_1", widget: "text"},
-              {label: "Paragraph 2", name: "text_2", widget: "text"},
-              {label: "Main Image", name: "image", widget: "image"}
+              {label: "Paragraph 2", name: "text_2", widget: "text", required: false},
+              {label: "Main Image", name: "image", widget: "image", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -63,10 +66,10 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "services"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Service Groups", name: "groups", widget: "list", fields: [
+          - {label: "Service Groups", name: "groups", widget: "list", summary: "{{title}} ({{number}})", fields: [
               {label: "Number (e.g. 01)", name: "number", widget: "string"},
               {label: "Group Title", name: "title", widget: "string"},
-              {label: "Links", name: "links", widget: "list", fields: [
+              {label: "Links", name: "links", widget: "list", summary: "{{name}} -> {{url}}", fields: [
                 {label: "Name", name: "name", widget: "string"},
                 {label: "URL Path", name: "url", widget: "string"}
               ]}
@@ -81,9 +84,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "media_center"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Directory Navigation Cards", name: "cards", widget: "list", fields: [
+          - {label: "Directory Navigation Cards", name: "cards", widget: "list", summary: "{{title}}", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon (e.g. mail, film, book, clipboard)", name: "icon", widget: "string"},
+              {label: "Icon (e.g. mail, film, book, clipboard)", name: "icon", widget: "string", required: false},
               {label: "Description Text", name: "text", widget: "text"},
               {label: "Destination Link", name: "url", widget: "string"}
             ]}
@@ -123,9 +126,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon (e.g. eye, book-open)", name: "icon", widget: "string"},
+              {label: "Icon (e.g. eye, book-open)", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -139,9 +142,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -155,9 +158,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -171,9 +174,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -187,9 +190,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -203,9 +206,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -219,9 +222,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -235,9 +238,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -251,9 +254,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -267,9 +270,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -283,9 +286,9 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "service_detail"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Feature Cards", name: "cards", widget: "list", fields: [
+          - {label: "Feature Cards", name: "cards", widget: "list", summary: "{{title}} (icon: {{icon}})", fields: [
               {label: "Card Title", name: "title", widget: "string"},
-              {label: "Icon", name: "icon", widget: "string"},
+              {label: "Icon", name: "icon", widget: "string", required: false},
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
@@ -305,7 +308,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -329,7 +332,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -343,7 +346,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -367,11 +370,11 @@ collections:
               {label: "Text", name: "text", widget: "text"}
             ]}
           - {label: "Available Filter Years", name: "years", widget: "list", field: {label: "Year", widget: "string"}}
-          - {label: "Bibliography PDF Files", name: "items", widget: "list", fields: [
+          - {label: "Bibliography PDF Files", name: "items", widget: "list", summary: "{{title}} ({{year}} - {{type}})", fields: [
               {label: "Document Title", name: "title", widget: "string"},
               {label: "PDF File Upload", name: "file_url", widget: "file"},
               {label: "Year", name: "year", widget: "string"},
-              {label: "Decade (e.g. 2010s)", name: "decade", widget: "string"},
+              {label: "Decade (e.g. 2010s)", name: "decade", widget: "string", required: false},
               {label: "Document Type", name: "type", widget: "select", options: ["final", "preliminary"]}
             ]}
 
@@ -389,11 +392,11 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "events"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Photo Galleries", name: "galleries", widget: "list", fields: [
+          - {label: "Photo Galleries", name: "galleries", widget: "list", summary: "{{title}} ({{id}})", fields: [
               {label: "Unique Folder ID (lowercase-no-spaces)", name: "id", widget: "string"},
               {label: "Gallery Title", name: "title", widget: "string"},
-              {label: "Description", name: "description", widget: "text"},
-              {label: "Image Uploads", name: "images", widget: "list", field: {label: "Image", widget: "image"}}
+              {label: "Description", name: "description", widget: "text", required: false},
+              {label: "Image Uploads", name: "images", widget: "list", summary: "Image", field: {label: "Image", widget: "image"}}
             ]}
 
       - file: "content/national-reading-day.md"
@@ -409,7 +412,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -423,7 +426,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -446,12 +449,12 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "dynamic_list"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Featured News Items", name: "items", widget: "list", fields: [
+          - {label: "Featured News Items", name: "items", widget: "list", summary: "{{title}} ({{publish_date}})", fields: [
               {label: "Headline Title", name: "title", widget: "string"},
               {label: "Summary Paragraph", name: "summary", widget: "text"},
-              {label: "Media Source (e.g., Daily Nation, The Star)", name: "publish_date", widget: "string"},
-              {label: "Thumbnail Image", name: "image_url", widget: "image"},
-              {label: "Original Story URL", name: "link_url", widget: "string"}
+              {label: "Media Source & Date", name: "publish_date", widget: "string"},
+              {label: "Thumbnail Image", name: "image_url", widget: "image", required: false},
+              {label: "Original Story URL", name: "link_url", widget: "string", required: false}
             ]}
 
       - file: "content/newsletter.md"
@@ -469,9 +472,9 @@ collections:
               {label: "Summary Text", name: "text", widget: "text"},
               {label: "PDF File Upload", name: "file_url", widget: "file"}
             ]}
-          - {label: "Archived Bulletins", name: "bulletins", widget: "list", fields: [
+          - {label: "Archived Bulletins", name: "bulletins", widget: "list", summary: "{{title}}", fields: [
               {label: "Title", name: "title", widget: "string"},
-              {label: "Text", name: "text", widget: "text"},
+              {label: "Text", name: "text", widget: "text", required: false},
               {label: "PDF File Upload", name: "file_url", widget: "file"}
             ]}
 
@@ -489,11 +492,11 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "roster"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Roster Members", name: "roster", widget: "list", fields: [
+          - {label: "Roster Members", name: "roster", widget: "list", summary: "{{name}} ({{role}})", fields: [
               {label: "Full Name", name: "name", widget: "string"},
               {label: "Role", name: "role", widget: "string"},
-              {label: "Avatar Photo", name: "avatar", widget: "image"},
-              {label: "Biography Summary", name: "bio", widget: "text"}
+              {label: "Avatar Photo", name: "avatar", widget: "image", required: false},
+              {label: "Biography Summary", name: "bio", widget: "text", required: false}
             ]}
 
       - file: "content/management-team.md"
@@ -505,11 +508,11 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "roster"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Roster Members", name: "roster", widget: "list", fields: [
+          - {label: "Roster Members", name: "roster", widget: "list", summary: "{{name}} ({{role}})", fields: [
               {label: "Full Name", name: "name", widget: "string"},
               {label: "Role", name: "role", widget: "string"},
-              {label: "Avatar Photo", name: "avatar", widget: "image"},
-              {label: "Biography Summary", name: "bio", widget: "text"}
+              {label: "Avatar Photo", name: "avatar", widget: "image", required: false},
+              {label: "Biography Summary", name: "bio", widget: "text", required: false}
             ]}
 
       - file: "content/strategic-plan.md"
@@ -521,11 +524,11 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "document_list"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Strategic Documents", name: "documents", widget: "list", fields: [
+          - {label: "Strategic Documents", name: "documents", widget: "list", summary: "{{title}} ({{meta}})", fields: [
               {label: "Document Title", name: "title", widget: "string"},
               {label: "Short Description", name: "text", widget: "text"},
-              {label: "Category Label", name: "meta", widget: "string"},
-              {label: "Cover Thumbnail Image", name: "cover", widget: "image"},
+              {label: "Category Label", name: "meta", widget: "string", required: false},
+              {label: "Cover Thumbnail Image", name: "cover", widget: "image", required: false},
               {label: "PDF File Upload", name: "url", widget: "file"}
             ]}
 
@@ -547,10 +550,10 @@ collections:
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
               {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "Download files", name: "items", widget: "list", fields: [
+              {label: "Download files", name: "items", widget: "list", summary: "{{title}} ({{meta}})", fields: [
                 {label: "File Title", name: "title", widget: "string"},
-                {label: "Description Text", name: "text", widget: "text"},
-                {label: "Label", name: "meta", widget: "string"},
+                {label: "Description Text", name: "text", widget: "text", required: false},
+                {label: "Label", name: "meta", widget: "string", required: false},
                 {label: "PDF File Upload", name: "url", widget: "file"}
               ]}
             ]}
@@ -558,10 +561,10 @@ collections:
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
               {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "YouTube items", name: "items", widget: "list", fields: [
+              {label: "YouTube items", name: "items", widget: "list", summary: "{{title}} (id: {{embed_id}})", fields: [
                 {label: "Title Label", name: "title", widget: "string"},
                 {label: "YouTube Video ID (11 chars)", name: "embed_id", widget: "string"},
-                {label: "Full Watch URL", name: "youtube_url", widget: "string"}
+                {label: "Full Watch URL", name: "youtube_url", widget: "string", required: false}
               ]}
             ]}
 
@@ -579,20 +582,20 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Subtitle", name: "subtitle", widget: "text"}
             ]}
-          - {label: "Opportunity tabs", name: "tabs", widget: "list", fields: [
+          - {label: "Opportunity tabs", name: "tabs", widget: "list", summary: "Tab: {{title}} ({{id}})", fields: [
               {label: "Anchor ID (vacancies, internships, attachments)", name: "id", widget: "string"},
               {label: "Tab Name", name: "title", widget: "string"},
               {label: "Section Heading", name: "heading", widget: "string"},
-              {label: "Paragraphs", name: "paragraphs", widget: "list", field: {label: "Paragraph text", widget: "text"}},
-              {label: "List 1 Title", name: "bullets_title", widget: "string"},
-              {label: "List 1 Items", name: "bullets", widget: "list", field: {label: "Item", widget: "string"}},
-              {label: "List 2 Title", name: "bullets_title_2", widget: "string"},
-              {label: "List 2 Items", name: "bullets_2", widget: "list", field: {label: "Item", widget: "string"}},
-              {label: "List 3 Title", name: "bullets_title_3", widget: "string"},
-              {label: "List 3 Items", name: "bullets_3", widget: "list", field: {label: "Item", widget: "string"}},
-              {label: "Tab Note footer", name: "note", widget: "text"},
-              {label: "Button Text Label", name: "button_text", widget: "string"},
-              {label: "Button Link URL", name: "button_url", widget: "string"}
+              {label: "Paragraphs", name: "paragraphs", widget: "list", summary: "Paragraph", field: {label: "Paragraph text", widget: "text"}},
+              {label: "List 1 Title", name: "bullets_title", widget: "string", required: false},
+              {label: "List 1 Items", name: "bullets", widget: "list", summary: "Item", required: false, field: {label: "Item", widget: "string"}},
+              {label: "List 2 Title", name: "bullets_title_2", widget: "string", required: false},
+              {label: "List 2 Items", name: "bullets_2", widget: "list", summary: "Item", required: false, field: {label: "Item", widget: "string"}},
+              {label: "List 3 Title", name: "bullets_title_3", widget: "string", required: false},
+              {label: "List 3 Items", name: "bullets_3", widget: "list", summary: "Item", required: false, field: {label: "Item", widget: "string"}},
+              {label: "Tab Note footer", name: "note", widget: "text", required: false},
+              {label: "Button Text Label", name: "button_text", widget: "string", required: false},
+              {label: "Button Link URL", name: "button_url", widget: "string", required: false}
             ]}
 
       - file: "content/partners-sponsors.md"
@@ -604,15 +607,15 @@ collections:
           - {label: "Layout", name: "layout", widget: "hidden", default: "partners"}
           - {label: "Kicker", name: "kicker", widget: "string"}
           - {label: "Subtitle", name: "subtitle", widget: "text"}
-          - {label: "Partner logos (Marquee)", name: "partner_logos", widget: "list", fields: [
+          - {label: "Partner logos (Marquee)", name: "partner_logos", widget: "list", summary: "Partner: {{name}}", fields: [
               {label: "Partner Name", name: "name", widget: "string"},
               {label: "Logo Image", name: "logo", widget: "image"},
-              {label: "Website URL", name: "url", widget: "string"}
+              {label: "Website URL", name: "url", widget: "string", required: false}
             ]}
           - {label: "Collaborations Info", name: "collaborators", widget: "object", fields: [
               {label: "Section Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "Items", name: "items", widget: "list", fields: [
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false},
+              {label: "Items", name: "items", widget: "list", summary: "Partner: {{title}}", fields: [
                 {label: "Partner Name", name: "title", widget: "string"},
                 {label: "Activity Description", name: "text", widget: "text"}
               ]}
@@ -630,12 +633,12 @@ collections:
           - {label: "Subtitle", name: "subtitle", widget: "text"}
           - {label: "Org Chart structure", name: "chart", widget: "object", fields: [
               {label: "Board Level Card Title", name: "board", widget: "string"},
-              {label: "Committee Level Card Title", name: "audit_committee", widget: "string"},
+              {label: "Committee Level Card Title", name: "audit_committee", widget: "string", required: false},
               {label: "Executive Level Card Title (e.g. Director General)", name: "executive", widget: "string"},
-              {label: "Standalone Departments", name: "standalone_departments", widget: "list", field: {label: "Department", widget: "string"}},
-              {label: "Directorates", name: "directorates", widget: "list", fields: [
+              {label: "Standalone Departments", name: "standalone_departments", widget: "list", summary: "Department", required: false, field: {label: "Department", widget: "string"}},
+              {label: "Directorates", name: "directorates", widget: "list", summary: "Directorate: {{name}}", required: false, fields: [
                 {label: "Directorate Name", name: "name", widget: "string"},
-                {label: "Child Departments", name: "departments", widget: "list", field: {label: "Department", widget: "string"}}
+                {label: "Child Departments", name: "departments", widget: "list", summary: "Department", field: {label: "Department", widget: "string"}}
               ]}
             ]}
 
@@ -653,36 +656,36 @@ collections:
               {label: "Heading", name: "title", widget: "string"},
               {label: "Text Description", name: "text", widget: "text"}
             ]}
-          - {label: "Metrics list", name: "stats", widget: "list", fields: [
+          - {label: "Metrics list", name: "stats", widget: "list", summary: "{{metric}}: {{label}}", required: false, fields: [
               {label: "Value / Year Range", name: "metric", widget: "string"},
               {label: "Label", name: "label", widget: "string"}
             ]}
-          - {label: "Section Spotlights", name: "spotlights", widget: "list", fields: [
+          - {label: "Section Spotlights", name: "spotlights", widget: "list", summary: "{{title}}", fields: [
               {label: "Title", name: "title", widget: "string"},
-              {label: "Kicker Label", name: "kicker", widget: "string"},
-              {label: "Icon name", name: "icon", widget: "string"},
+              {label: "Kicker Label", name: "kicker", widget: "string", required: false},
+              {label: "Icon name", name: "icon", widget: "string", required: false},
               {label: "Description", name: "text", widget: "text"}
             ]}
           - {label: "National Maktaba Awards", name: "national_awards", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Section Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "Awards items", name: "items", widget: "list", fields: [
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false},
+              {label: "Awards items", name: "items", widget: "list", summary: "Year {{year}}", fields: [
                 {label: "Year", name: "year", widget: "string"},
-                {label: "List of recognitions (HTML ok)", name: "list", widget: "list", field: {label: "Recognition item", widget: "string"}}
+                {label: "List of recognitions", name: "list", widget: "list", summary: "Award", field: {label: "Recognition item", widget: "string"}}
               ]}
             ]}
           - {label: "International Recognition", name: "international_awards", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Section Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "Awards items", name: "items", widget: "list", fields: [
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false},
+              {label: "Awards items", name: "items", widget: "list", summary: "{{year}}: {{title}}", fields: [
                 {label: "Year", name: "year", widget: "string"},
                 {label: "Title", name: "title", widget: "string"},
-                {label: "Metadata type label", name: "meta", widget: "string"},
-                {label: "Highlight Card (True/False)", name: "major", widget: "boolean"},
+                {label: "Metadata type label", name: "meta", widget: "string", required: false},
+                {label: "Highlight Card (True/False)", name: "major", widget: "boolean", required: false},
                 {label: "Body Text (HTML ok)", name: "text", widget: "text"},
-                {label: "List of awards (Optional)", name: "list", widget: "list", field: {label: "Award item", widget: "string"}}
+                {label: "List of awards (Optional)", name: "list", widget: "list", summary: "Award", required: false, field: {label: "Award item", widget: "string"}}
               ]}
             ]}
           - {label: "Why this matters", name: "context", widget: "object", fields: [
@@ -692,7 +695,7 @@ collections:
             ]}
           - {label: "Further reading", name: "further_reading", widget: "object", fields: [
               {label: "Section Title", name: "title", widget: "string"},
-              {label: "Reference links", name: "links", widget: "list", fields: [
+              {label: "Reference links", name: "links", widget: "list", summary: "{{label}}", fields: [
                 {label: "Link Label", name: "label", widget: "string"},
                 {label: "URL Target", name: "url", widget: "string"}
               ]}
@@ -719,18 +722,18 @@ collections:
             ]}
           - {label: "Quick provider logo links", name: "provider_strip", widget: "object", fields: [
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"},
-              {label: "Providers", name: "providers", widget: "list", fields: [
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false},
+              {label: "Providers", name: "providers", widget: "list", summary: "{{name}}", fields: [
                 {label: "Provider Name", name: "name", widget: "string"},
                 {label: "Logo Image URL", name: "logo", widget: "string"},
-                {label: "Website URL", name: "url", widget: "string"}
+                {label: "Website URL", name: "url", widget: "string", required: false}
               ]}
             ]}
-          - {label: "Gateway category links", name: "categories", widget: "list", fields: [
+          - {label: "Gateway category links", name: "categories", widget: "list", summary: "{{title}}", fields: [
               {label: "Category Title", name: "title", widget: "string"},
-              {label: "Icon (e.g. book-open, zap, lock, search)", name: "icon", widget: "string"},
+              {label: "Icon (e.g. book-open, zap, lock, search)", name: "icon", widget: "string", required: false},
               {label: "Description", name: "text", widget: "text"},
-              {label: "Button label", name: "button_text", widget: "string"},
+              {label: "Button label", name: "button_text", widget: "string", required: false},
               {label: "Relative URL Path", name: "url", widget: "string"}
             ]}
 
@@ -748,15 +751,15 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Text", name: "text", widget: "text"}
             ]}
-          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", summary: "Category: {{name}}", fields: [
               {label: "Category Name", name: "name", widget: "string"},
-              {label: "Databases list", name: "items", widget: "list", fields: [
+              {label: "Databases list", name: "items", widget: "list", summary: "{{title}}", fields: [
                 {label: "Database Title", name: "title", widget: "string"},
                 {label: "Direct Link URL", name: "url", widget: "string"},
-                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string", required: false},
                 {label: "Summary Paragraph", name: "summary", widget: "text"},
-                {label: "Access details (e.g. IP Access, Login)", name: "note", widget: "string"},
-                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string"}
+                {label: "Access details (e.g. IP Access, Login)", name: "note", widget: "string", required: false},
+                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string", required: false}
               ]}
             ]}
 
@@ -774,15 +777,15 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Text", name: "text", widget: "text"}
             ]}
-          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", summary: "Category: {{name}}", fields: [
               {label: "Category Name", name: "name", widget: "string"},
-              {label: "Databases list", name: "items", widget: "list", fields: [
+              {label: "Databases list", name: "items", widget: "list", summary: "{{title}}", fields: [
                 {label: "Database Title", name: "title", widget: "string"},
                 {label: "Direct Link URL", name: "url", widget: "string"},
-                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string", required: false},
                 {label: "Summary Paragraph", name: "summary", widget: "text"},
-                {label: "Access details (e.g. Open Access)", name: "note", widget: "string"},
-                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string"}
+                {label: "Access details (e.g. Open Access)", name: "note", widget: "string", required: false},
+                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string", required: false}
               ]}
             ]}
 
@@ -800,15 +803,15 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Text", name: "text", widget: "text"}
             ]}
-          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", summary: "Category: {{name}}", fields: [
               {label: "Category Name", name: "name", widget: "string"},
-              {label: "Databases list", name: "items", widget: "list", fields: [
+              {label: "Databases list", name: "items", widget: "list", summary: "{{title}}", fields: [
                 {label: "Database Title", name: "title", widget: "string"},
                 {label: "Direct Link URL", name: "url", widget: "string"},
-                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string", required: false},
                 {label: "Summary Paragraph", name: "summary", widget: "text"},
-                {label: "Access details (e.g. Subscribed)", name: "note", widget: "string"},
-                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string"}
+                {label: "Access details (e.g. Subscribed)", name: "note", widget: "string", required: false},
+                {label: "Search tags (lowercase space separated)", name: "tags", widget: "string", required: false}
               ]}
             ]}
 
@@ -826,19 +829,19 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Description", name: "text", widget: "text"},
               {label: "Google CSE CX Key", name: "cx", widget: "string"},
-              {label: "Fallback Search URL", name: "cse_url", widget: "string"},
-              {label: "Fallback Button Label", name: "button_label", widget: "string"},
-              {label: "Search Tips List", name: "tips", widget: "list", field: {label: "Tip", widget: "string"}}
+              {label: "Fallback Search URL", name: "cse_url", widget: "string", required: false},
+              {label: "Fallback Button Label", name: "button_label", widget: "string", required: false},
+              {label: "Search Tips List", name: "tips", widget: "list", summary: "Search Tip", field: {label: "Tip", widget: "string"}}
             ]}
-          - {label: "Collapsible Database Categories", name: "categories", widget: "list", fields: [
+          - {label: "Collapsible Database Categories", name: "categories", widget: "list", summary: "Category: {{name}}", fields: [
               {label: "Category Name", name: "name", widget: "string"},
-              {label: "Databases list", name: "items", widget: "list", fields: [
+              {label: "Databases list", name: "items", widget: "list", summary: "{{title}}", fields: [
                 {label: "Database Title", name: "title", widget: "string"},
                 {label: "Direct Link URL", name: "url", widget: "string"},
-                {label: "Logo image URL", name: "logo", widget: "string"},
+                {label: "Logo image URL", name: "logo", widget: "string", required: false},
                 {label: "Summary Paragraph", name: "summary", widget: "text"},
-                {label: "Access details", name: "note", widget: "string"},
-                {label: "Search tags", name: "tags", widget: "string"}
+                {label: "Access details", name: "note", widget: "string", required: false},
+                {label: "Search tags", name: "tags", widget: "string", required: false}
               ]}
             ]}
 
@@ -856,7 +859,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -869,7 +872,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -882,7 +885,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -895,7 +898,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -908,7 +911,7 @@ collections:
           - {label: "Hero Details", name: "hero", widget: "object", fields: [
               {label: "Kicker", name: "kicker", widget: "string"},
               {label: "Title", name: "title", widget: "string"},
-              {label: "Subtitle", name: "subtitle", widget: "text"}
+              {label: "Subtitle", name: "subtitle", widget: "text", required: false}
             ]}
           - {label: "Body Content", name: "body", widget: "markdown"}
 
@@ -924,25 +927,25 @@ collections:
           - {label: "Header Top Ribbon Contact Info", name: "contact_strip", widget: "object", fields: [
               {label: "Phone Text (e.g. +254...)", name: "phone", widget: "string"},
               {label: "Email Address (e.g. info...)", name: "email", widget: "string"},
-              {label: "Ecitizen Label Text", name: "ecitizen_label", widget: "string"},
-              {label: "Ecitizen Target Link", name: "ecitizen_url", widget: "string"},
-              {label: "Staff Portal Label Text", name: "staff_label", widget: "string"},
-              {label: "Staff Portal Target Link", name: "staff_url", widget: "string"},
-              {label: "Suppliers Portal Label Text", name: "suppliers_label", widget: "string"},
-              {label: "Suppliers Portal Target Link", name: "suppliers_url", widget: "string"}
+              {label: "Ecitizen Label Text", name: "ecitizen_label", widget: "string", required: false},
+              {label: "Ecitizen Target Link", name: "ecitizen_url", widget: "string", required: false},
+              {label: "Staff Portal Label Text", name: "staff_label", widget: "string", required: false},
+              {label: "Staff Portal Target Link", name: "staff_url", widget: "string", required: false},
+              {label: "Suppliers Portal Label Text", name: "suppliers_label", widget: "string", required: false},
+              {label: "Suppliers Portal Target Link", name: "suppliers_url", widget: "string", required: false}
             ]}
-          - {label: "Header Main Menu Options", name: "main_menu", widget: "list", fields: [
+          - {label: "Header Main Menu Options", name: "main_menu", widget: "list", summary: "{{name}}", fields: [
               {label: "Category Name (e.g. Services, About)", name: "name", widget: "string"},
-              {label: "Direct Link URL (if no dropdown)", name: "url", widget: "string"},
-              {label: "Dropdown Submenus List (Optional)", name: "dropdown", widget: "list", fields: [
+              {label: "Direct Link URL (if no dropdown)", name: "url", widget: "string", required: false},
+              {label: "Dropdown Submenus List (Optional)", name: "dropdown", widget: "list", required: false, summary: "{{name}} -> {{url}}", fields: [
                 {label: "Link Name", name: "name", widget: "string"},
                 {label: "Link Target URL", name: "url", widget: "string"},
-                {label: "Timed Expiration Date (Optional)", name: "expiry", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZZ"}
+                {label: "Timed Expiration Date (Optional)", name: "expiry", widget: "datetime", required: false, format: "YYYY-MM-DDTHH:mm:ssZZ"}
               ]}
             ]}
-          - {label: "Footer Navigation Links Columns", name: "footer_columns", widget: "list", fields: [
+          - {label: "Footer Navigation Links Columns", name: "footer_columns", widget: "list", summary: "Column: {{title}}", fields: [
               {label: "Column Title", name: "title", widget: "string"},
-              {label: "Links list", name: "links", widget: "list", fields: [
+              {label: "Links list", name: "links", widget: "list", summary: "{{name}} -> {{url}}", fields: [
                 {label: "Link Name", name: "name", widget: "string"},
                 {label: "Link Target URL", name: "url", widget: "string"}
               ]}

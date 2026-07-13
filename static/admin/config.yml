@@ -369,7 +369,7 @@ collections:
               {label: "Title", name: "title", widget: "string"},
               {label: "Text", name: "text", widget: "text"}
             ]}
-          - {label: "Available Filter Years", name: "years", widget: "list", field: {label: "Year", widget: "string"}}
+          - {label: "Available Filter Years", name: "years", widget: "list", field: {name: "year", label: "Year", widget: "string"}}
           - {label: "Bibliography PDF Files", name: "items", widget: "list", summary: "{{title}} ({{year}} - {{type}})", fields: [
               {label: "Document Title", name: "title", widget: "string"},
               {label: "PDF File Upload", name: "file_url", widget: "file"},
@@ -396,7 +396,7 @@ collections:
               {label: "Unique Folder ID (lowercase-no-spaces)", name: "id", widget: "string"},
               {label: "Gallery Title", name: "title", widget: "string"},
               {label: "Description", name: "description", widget: "text", required: false},
-              {label: "Image Uploads", name: "images", widget: "list", summary: "Image", field: {label: "Image", widget: "image"}}
+              {label: "Image Uploads", name: "images", widget: "list", summary: "Image", field: {name: "image", label: "Image", widget: "image"}}
             ]}
 
       - file: "content/national-reading-day.md"
@@ -586,13 +586,13 @@ collections:
               {label: "Anchor ID (vacancies, internships, attachments)", name: "id", widget: "string"},
               {label: "Tab Name", name: "title", widget: "string"},
               {label: "Section Heading", name: "heading", widget: "string"},
-              {label: "Paragraphs", name: "paragraphs", widget: "list", summary: "Paragraph", field: {label: "Paragraph text", widget: "text"}},
+              {label: "Paragraphs", name: "paragraphs", widget: "list", summary: "Paragraph", field: {name: "paragraph", label: "Paragraph text", widget: "text"}},
               {label: "List 1 Title", name: "bullets_title", widget: "string", required: false},
-              {label: "List 1 Items", name: "bullets", widget: "list", summary: "Item", required: false, field: {label: "Item", widget: "string"}},
+              {label: "List 1 Items", name: "bullets", widget: "list", summary: "Item", required: false, field: {name: "bullet", label: "Item", widget: "string"}},
               {label: "List 2 Title", name: "bullets_title_2", widget: "string", required: false},
-              {label: "List 2 Items", name: "bullets_2", widget: "list", summary: "Item", required: false, field: {label: "Item", widget: "string"}},
+              {label: "List 2 Items", name: "bullets_2", widget: "list", summary: "Item", required: false, field: {name: "bullet", label: "Item", widget: "string"}},
               {label: "List 3 Title", name: "bullets_title_3", widget: "string", required: false},
-              {label: "List 3 Items", name: "bullets_3", widget: "list", summary: "Item", required: false, field: {label: "Item", widget: "string"}},
+              {label: "List 3 Items", name: "bullets_3", widget: "list", summary: "Item", required: false, field: {name: "bullet", label: "Item", widget: "string"}},
               {label: "Tab Note footer", name: "note", widget: "text", required: false},
               {label: "Button Text Label", name: "button_text", widget: "string", required: false},
               {label: "Button Link URL", name: "button_url", widget: "string", required: false}
@@ -635,10 +635,10 @@ collections:
               {label: "Board Level Card Title", name: "board", widget: "string"},
               {label: "Committee Level Card Title", name: "audit_committee", widget: "string", required: false},
               {label: "Executive Level Card Title (e.g. Director General)", name: "executive", widget: "string"},
-              {label: "Standalone Departments", name: "standalone_departments", widget: "list", summary: "Department", required: false, field: {label: "Department", widget: "string"}},
+              {label: "Standalone Departments", name: "standalone_departments", widget: "list", summary: "Department", required: false, field: {name: "department", label: "Department", widget: "string"}},
               {label: "Directorates", name: "directorates", widget: "list", summary: "Directorate: {{name}}", required: false, fields: [
                 {label: "Directorate Name", name: "name", widget: "string"},
-                {label: "Child Departments", name: "departments", widget: "list", summary: "Department", field: {label: "Department", widget: "string"}}
+                {label: "Child Departments", name: "departments", widget: "list", summary: "Department", field: {name: "department", label: "Department", widget: "string"}}
               ]}
             ]}
 
@@ -672,7 +672,7 @@ collections:
               {label: "Subtitle", name: "subtitle", widget: "text", required: false},
               {label: "Awards items", name: "items", widget: "list", summary: "Year {{year}}", fields: [
                 {label: "Year", name: "year", widget: "string"},
-                {label: "List of recognitions", name: "list", widget: "list", summary: "Award", field: {label: "Recognition item", widget: "string"}}
+                {label: "List of recognitions", name: "list", widget: "list", summary: "Award", field: {name: "item", label: "Recognition item", widget: "string"}}
               ]}
             ]}
           - {label: "International Recognition", name: "international_awards", widget: "object", fields: [
@@ -685,7 +685,7 @@ collections:
                 {label: "Metadata type label", name: "meta", widget: "string", required: false},
                 {label: "Highlight Card (True/False)", name: "major", widget: "boolean", required: false},
                 {label: "Body Text (HTML ok)", name: "text", widget: "text"},
-                {label: "List of awards (Optional)", name: "list", widget: "list", summary: "Award", required: false, field: {label: "Award item", widget: "string"}}
+                {label: "List of awards (Optional)", name: "list", widget: "list", summary: "Award", required: false, field: {name: "item", label: "Award item", widget: "string"}}
               ]}
             ]}
           - {label: "Why this matters", name: "context", widget: "object", fields: [
@@ -831,7 +831,7 @@ collections:
               {label: "Google CSE CX Key", name: "cx", widget: "string"},
               {label: "Fallback Search URL", name: "cse_url", widget: "string", required: false},
               {label: "Fallback Button Label", name: "button_label", widget: "string", required: false},
-              {label: "Search Tips List", name: "tips", widget: "list", summary: "Search Tip", field: {label: "Tip", widget: "string"}}
+              {label: "Search Tips List", name: "tips", widget: "list", summary: "Search Tip", field: {name: "tip", label: "Tip", widget: "string"}}
             ]}
           - {label: "Collapsible Database Categories", name: "categories", widget: "list", summary: "Category: {{name}}", fields: [
               {label: "Category Name", name: "name", widget: "string"},

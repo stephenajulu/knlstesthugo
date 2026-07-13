@@ -167,6 +167,33 @@
       margin: 1.5rem 0 0.5rem 0.875rem !important;
       font-family: 'Inter', sans-serif !important;
     }
+
+    /* Floating Walkthrough Tour Button */
+    #knls-tour-btn {
+      position: fixed !important;
+      bottom: 20px !important;
+      right: 20px !important;
+      background-color: #2D2C8E !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 999px !important;
+      padding: 10px 18px !important;
+      font-size: 0.85rem !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      box-shadow: 0 10px 15px -3px rgba(45, 44, 142, 0.3), 0 4px 6px -4px rgba(45, 44, 142, 0.3) !important;
+      z-index: 999999 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      transition: all 0.2s ease !important;
+    }
+
+    #knls-tour-btn:hover {
+      background-color: #F48312 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 10px 15px -3px rgba(244, 131, 18, 0.4) !important;
+    }
   </style>
 </head>
 <body>
@@ -185,6 +212,98 @@
     // Register custom typography and layout styles to render previews correctly
     CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
     CMS.registerPreviewStyle("/assets/css/styles.css");
+
+    // Wait until the CMS interface is loaded to inject the tour button and setup the guide
+    const initTour = () => {
+      const checkExist = setInterval(() => {
+        const sidebar = document.querySelector('aside');
+        const header = document.querySelector('header');
+        if (sidebar && header) {
+          clearInterval(checkExist);
+          
+          // Create floating tour button
+          const tourBtn = document.createElement('button');
+          tourBtn.id = 'knls-tour-btn';
+          tourBtn.innerHTML = '✨ Start Portal Tour';
+          document.body.appendChild(tourBtn);
+          
+          // Initialize Driver.js
+          const driver = window.driver.js.driver;
+          const driverObj = driver({
+            showProgress: true,
+            steps: [
+              {
+                element: 'header',
+                popover: {
+                  title: 'Welcome to KNLS Admin',
+                  description: 'This is the main admin dashboard for managing the Kenya National Library Service website. The official logo confirms you are in the secure management zone.',
+                  position: 'bottom'
+                }
+              },
+              {
+                element: 'aside',
+                popover: {
+                  title: 'Organized Collections Sidebar',
+                  description: 'Here you will find all 39 pages grouped into logical sections like Content Management (Core Pages, Services) and Settings & Menus.',
+                  position: 'right'
+                }
+              },
+              {
+                element: 'aside::before',
+                popover: {
+                  title: 'Helpful Guidance Notice',
+                  description: 'Always remember: changes are saved as drafts first. This gives you a chance to review your edits before they go live on the internet.',
+                  position: 'right'
+                }
+              },
+              {
+                element: 'header div[class*="AppHeaderContent"]',
+                popover: {
+                  title: 'Editorial Workflow & Users',
+                  description: 'At the top, you can invite new editors, log out, or view active drafts under the editorial workflow tabs.',
+                  position: 'bottom'
+                }
+              },
+              {
+                element: '#knls-tour-btn',
+                popover: {
+                  title: 'Walkthrough Complete!',
+                  description: 'You are ready to manage the site. If you ever need a refresher, just click this button to restart the tour!',
+                  position: 'left'
+                }
+              }
+            ]
+          });
+          
+          tourBtn.addEventListener('click', () => {
+            driverObj.drive();
+          });
+          
+          // Auto-start tour for first-time visitors
+          if (!localStorage.getItem('knls_tour_completed')) {
+            setTimeout(() => {
+              driverObj.drive();
+              localStorage.setItem('knls_tour_completed', 'true');
+            }, 1500);
+          }
+        }
+      }, 500);
+    };
+
+    // Load Driver.js resources
+    const loadDriverAssets = () => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css';
+      document.head.appendChild(link);
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js';
+      script.onload = initTour;
+      document.body.appendChild(script);
+    };
+
+    window.addEventListener('load', loadDriverAssets);
   </script>
 </body>
 </html>

@@ -6,7 +6,7 @@ body_class: home-page
 hero:
   panel:
     kicker: Kenya National Library Service
-    title: Read. Know. Empower. Inspire.
+    title: Read. Know. Empower.
     subtitle: Access library services, digital resources, national collections and
       publishing support through Kenya’s national knowledge gateway.
     actions:
